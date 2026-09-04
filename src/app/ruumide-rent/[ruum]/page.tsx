@@ -56,7 +56,7 @@ export default async function RoomPage({ params }: RoomPageProps) {
     <div className="wrap">
       <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
         {/* Vasak veerg: foto, nimi, faktid, omadused, teised ruumid */}
-        <div className="py-8 lg:border-r lg:border-line lg:py-12 lg:pr-12 xl:pr-16">
+        <div className="py-6 lg:border-r lg:border-line lg:py-8 lg:pr-10 xl:pr-12">
           <Link href="/#ruumid" className="arrow-link text-sm">
             <ArrowLeftIcon />
             {content.navigation[1].label}
@@ -66,55 +66,52 @@ export default async function RoomPage({ params }: RoomPageProps) {
             photo={room.photo}
             priority
             sizes="(min-width: 1024px) 55vw, 100vw"
-            className="mt-6 aspect-[4/3] rounded-md border border-line"
+            className="mt-4 aspect-[16/9] rounded-md border border-line lg:aspect-auto lg:h-[clamp(12rem,calc(100svh-37rem),19rem)]"
           />
 
-          <h1 className="mt-8">{room.name}</h1>
-
-          <ul className="mt-5 flex flex-wrap items-center gap-x-8 gap-y-3">
-            <li className="flex items-center gap-3 text-[0.9375rem] text-ink">
-              <span className="flex size-11 items-center justify-center rounded-full border border-line bg-surface text-sage">
-                <UsersIcon size={20} />
-              </span>
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+            <h1 className="text-h2">{room.name}</h1>
+            <span className="pill pill-soft">
+              <UsersIcon size={16} />
               {room.capacityLabel}
-            </li>
-          </ul>
+            </span>
+          </div>
 
-          <p className="mt-6 max-w-prose">{room.description}</p>
+          <p className="mt-3 max-w-prose text-[0.9375rem]">{room.description}</p>
 
-          <ul className="mt-6 divide-y divide-line border-y border-line">
+          <ul className="mt-4 divide-y divide-line border-y border-line">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (
-                <li key={feature.title} className="flex items-start gap-4 py-5">
-                  <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-sage-soft text-sage">
-                    <Icon size={20} />
+                <li key={feature.title} className="flex items-start gap-3 py-3">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sage-soft text-sage">
+                    <Icon size={17} />
                   </span>
                   <span>
-                    <span className="block font-medium text-ink">{feature.title}</span>
-                    <span className="meta block text-[0.9375rem]">{feature.text}</span>
+                    <span className="block text-[0.9375rem] font-medium text-ink">{feature.title}</span>
+                    <span className="meta block">{feature.text}</span>
                   </span>
                 </li>
               );
             })}
           </ul>
 
-          <a href="#broneeri" className="btn btn-sage btn-block mt-8 lg:hidden">
+          <a href="#broneeri" className="btn btn-sage btn-block mt-6 lg:hidden">
             {content.hero.secondaryCta}
           </a>
 
-          <nav aria-label="Teised ruumid" className="mt-12">
+          <nav aria-label="Teised ruumid" className="mt-6">
             <p className="meta">Teised ruumid</p>
             <ul className="mt-2 divide-y divide-line border-y border-line">
               {others.map((item) => (
                 <li key={item.slug}>
                   <Link
                     href={roomHref(item.slug)}
-                    className="group flex items-center justify-between gap-4 py-4 text-lg font-medium text-ink transition-colors hover:text-sage"
+                    className="group flex items-center justify-between gap-4 py-2.5 text-base font-medium text-ink transition-colors hover:text-sage"
                   >
                     <span>
                       {item.name}
-                      <span className="meta block font-normal">{item.capacityLabel}</span>
+                      <span className="meta ml-2 font-normal">{item.capacityLabel}</span>
                     </span>
                     <ArrowRightIcon className="shrink-0 transition-transform group-hover:translate-x-1" />
                   </Link>
@@ -128,12 +125,12 @@ export default async function RoomPage({ params }: RoomPageProps) {
         <section
           id="broneeri"
           aria-labelledby={`broneeri-${room.slug}`}
-          className="scroll-mt-28 border-t border-line py-8 lg:border-t-0 lg:py-12 lg:pl-12 xl:pl-16"
+          className="scroll-mt-28 border-t border-line py-6 lg:border-t-0 lg:py-8 lg:pl-10 xl:pl-12"
         >
           <h2 id={`broneeri-${room.slug}`} className="sr-only">
             {content.booking.heading}
           </h2>
-          <div className="lg:sticky lg:top-28">
+          <div className="lg:sticky lg:top-24">
             <BookingFlow rooms={rooms} config={config} initialRoom={room.slug} />
           </div>
         </section>

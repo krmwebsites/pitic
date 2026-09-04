@@ -169,24 +169,24 @@ export function BookingFlow({ rooms, config, initialRoom }: Props) {
   }
 
   return (
-    <div className="surface p-5 sm:p-7">
-      <h3 className="text-h3">
+    <div className="surface p-5 sm:p-6">
+      <h3 className="text-[1.25rem] font-medium">
         {content.hero.secondaryCta.split(" ")[0]} {room.name.toLowerCase()}
       </h3>
-      <div className="mt-6">
+      <div className="mt-4">
         <StepIndicator steps={STEPS} current={step} />
       </div>
 
       {config.mock && (
-        <p className="mt-4 rounded-sm bg-sage-soft px-3 py-2 text-sm text-sage" role="status">
+        <p className="mt-3 rounded-sm bg-sage-soft px-3 py-1.5 text-sm text-sage" role="status">
           Testrežiim: näidisajad, päris broneeringut ei tehta.
         </p>
       )}
 
       {step === 1 && (
-        <div className="mt-6">
+        <div className="mt-4">
           <p className="text-[0.9375rem] font-medium text-ink">Vali kuupäev</p>
-          <div className="mt-3">
+          <div className="mt-2">
             <Calendar
               month={month}
               onMonthChange={(next) => {
@@ -231,7 +231,7 @@ export function BookingFlow({ rooms, config, initialRoom }: Props) {
           )}
 
           {date && (
-            <div className="mt-6">
+            <div className="mt-4">
               <p className="text-[0.9375rem] font-medium text-ink">Vabad ajad</p>
               {slots.length === 0 ? (
                 <p className="meta mt-2">Sellel päeval vabu aegu ei ole.</p>
@@ -260,10 +260,10 @@ export function BookingFlow({ rooms, config, initialRoom }: Props) {
           )}
 
           {service && (
-            <dl className="mt-6 grid gap-3">
+            <dl className="mt-4 grid gap-3">
               <div>
                 <dt className="text-[0.9375rem] font-medium text-ink">Kestus</dt>
-                <dd className="mt-1.5 flex items-center justify-between rounded-sm border border-line px-3.5 py-2.5 text-[0.9375rem]">
+                <dd className="mt-1.5 flex items-center justify-between rounded-sm border border-line px-3.5 py-2 text-[0.9375rem]">
                   <span>{durationLabel(service.durationMinutes)}</span>
                   {time && endTime && (
                     <span className="meta tabular-nums">
@@ -281,10 +281,10 @@ export function BookingFlow({ rooms, config, initialRoom }: Props) {
             </dl>
           )}
 
-          <button type="button" onClick={() => setStep(2)} disabled={!date || !time} className="btn btn-sage btn-block mt-6">
+          <button type="button" onClick={() => setStep(2)} disabled={!date || !time} className="btn btn-sage btn-block mt-4">
             {content.booking.continueLabel}
           </button>
-          <p className="meta mt-3 text-center text-xs">Broneerimine SimplyBook.me kaudu</p>
+          <p className="meta mt-2 text-center text-xs">Broneerimine SimplyBook.me kaudu</p>
         </div>
       )}
 

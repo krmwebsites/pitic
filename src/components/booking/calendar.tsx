@@ -65,13 +65,13 @@ export function Calendar({ month, onMonthChange, minMonth, maxMonth, available, 
   const rows = cells.slice(35).every((d) => d.getMonth() !== first.getMonth()) ? cells.slice(0, 35) : cells;
 
   return (
-    <div className="rounded-md border border-line bg-surface p-3 sm:p-4" aria-busy={loading}>
+    <div className="rounded-md border border-line bg-surface p-3" aria-busy={loading}>
       <div className="flex items-center justify-between">
         <button
           type="button"
           onClick={() => onMonthChange(new Date(first.getFullYear(), first.getMonth() - 1, 1))}
           disabled={!canPrev}
-          className="inline-flex size-10 items-center justify-center rounded-sm text-ink transition-colors hover:bg-surface-hover disabled:cursor-not-allowed disabled:text-line-strong"
+          className="inline-flex size-9 items-center justify-center rounded-sm text-ink transition-colors hover:bg-surface-hover disabled:cursor-not-allowed disabled:text-line-strong"
           aria-label="Eelmine kuu"
         >
           <ArrowLeftIcon />
@@ -83,14 +83,14 @@ export function Calendar({ month, onMonthChange, minMonth, maxMonth, available, 
           type="button"
           onClick={() => onMonthChange(new Date(first.getFullYear(), first.getMonth() + 1, 1))}
           disabled={!canNext}
-          className="inline-flex size-10 items-center justify-center rounded-sm text-ink transition-colors hover:bg-surface-hover disabled:cursor-not-allowed disabled:text-line-strong"
+          className="inline-flex size-9 items-center justify-center rounded-sm text-ink transition-colors hover:bg-surface-hover disabled:cursor-not-allowed disabled:text-line-strong"
           aria-label="Järgmine kuu"
         >
           <ArrowRightIcon />
         </button>
       </div>
 
-      <div className="mt-3 grid grid-cols-7 text-center" role="grid" aria-label={`Kalender, ${monthLabel(first)}`}>
+      <div className="mt-2 grid grid-cols-7 text-center" role="grid" aria-label={`Kalender, ${monthLabel(first)}`}>
         {WEEKDAYS_ET.map((day) => (
           <div key={day} role="columnheader" className="meta py-1 text-xs font-medium tracking-wide">
             {day}
@@ -103,7 +103,7 @@ export function Calendar({ month, onMonthChange, minMonth, maxMonth, available, 
           const isSelected = selected === iso;
           const isToday = iso === todayIso;
           const label = date.toLocaleDateString("et-EE", { weekday: "long", day: "numeric", month: "long" });
-          const base = "mx-auto my-0.5 flex size-10 items-center justify-center rounded-full text-[0.9375rem] tabular-nums";
+          const base = "mx-auto flex size-9 items-center justify-center rounded-full text-[0.9375rem] tabular-nums";
           if (!isAvailable) {
             return (
               <div key={iso} role="gridcell" aria-disabled="true" aria-label={label}>
