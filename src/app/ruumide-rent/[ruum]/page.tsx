@@ -50,7 +50,7 @@ export default async function RoomPage({ params }: RoomPageProps) {
           </Link>
 
           {/* Galerii: suur pilt, nooled, pisipildid ja täisekraanivaade. */}
-          <div className="mt-4">
+          <div className="mt-4 lg:max-w-[28rem]">
             <RoomGallery
               photos={room.gallery}
               roomName={room.name}
