@@ -24,7 +24,7 @@ export function AboutSection() {
           <div>
             <p className="eyebrow">{meist}</p>
             <h2 id="meist-pealkiri" className="mt-3">
-              {content.hero.houseCta}
+              {content.about.heading}
             </h2>
             <p className="lead mt-4 max-w-[48ch]">
               Pitic asub Keila keskväljakul, aadressil {site.address.full}. Ühes majas on renditavad jõusaal, nõupidamiste
