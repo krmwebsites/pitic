@@ -30,19 +30,20 @@ export default function HomePage() {
     <>
       {/*
         Hero: ümarate nurkadega konteiner; desktopil tekstiplokk vasakus veerus
-        ja foto paremas veerus kõrvuti (ilma kattumiseta), mobiilis foto
-        üleval ja kaart selle all, kattes foto alumist serva.
+        ja foto paremas veerus kõrvuti. Foto hoiab oma kuvasuhet, et terve
+        hoone oleks näha; konteineri kõrguse annab foto. Mobiilis foto üleval
+        ja kaart selle all, kattes foto alumist serva.
       */}
       <section aria-labelledby="hero-pealkiri" className="wrap pt-4 lg:pt-6">
-        <div className="relative flex min-h-[calc(100svh-6.5rem)] flex-col overflow-hidden rounded-xl bg-surface-hover lg:h-[calc(100svh-8rem)] lg:min-h-[26rem] lg:flex-row lg:items-stretch lg:border lg:border-line lg:bg-surface">
+        <div className="relative flex min-h-[calc(100svh-6.5rem)] flex-col overflow-hidden rounded-xl bg-surface-hover lg:h-auto lg:min-h-0 lg:flex-row lg:items-stretch lg:border lg:border-line lg:bg-surface">
           <Photo
             photo={photos.hero}
             priority
-            sizes="(min-width: 1024px) 52vw, 100vw"
-            className="rise rise-4 min-h-[15rem] flex-1 lg:order-2 lg:h-full lg:w-[52%] lg:flex-none"
+            sizes="(min-width: 1024px) 54vw, 100vw"
+            className="rise rise-4 aspect-[1427/1102] w-full flex-none lg:order-2 lg:w-[54%]"
           />
 
-          <div className="relative z-10 mx-3 -mt-20 mb-3 shrink-0 rounded-lg bg-surface p-4 shadow-soft sm:mx-6 sm:-mt-24 sm:mb-4 sm:p-8 lg:order-1 lg:m-0 lg:flex lg:w-[48%] lg:flex-col lg:justify-center lg:rounded-none lg:px-9 lg:py-8 lg:shadow-none xl:px-12">
+          <div className="relative z-10 mx-3 -mt-20 mb-3 shrink-0 rounded-lg bg-surface p-4 shadow-soft sm:mx-6 sm:-mt-24 sm:mb-4 sm:p-8 lg:order-1 lg:m-0 lg:flex lg:w-[46%] lg:flex-col lg:justify-center lg:rounded-none lg:px-9 lg:py-8 lg:shadow-none xl:px-11">
             <div className="rise flex flex-wrap items-center justify-between gap-3">
               <p className="eyebrow">
                 <PinIcon size={18} />
