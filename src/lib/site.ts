@@ -25,8 +25,9 @@ export const site = {
     href: `mailto:${content.brand.email}`,
   },
   maps: {
-    link: "https://www.google.com/maps/search/?api=1&query=Keskv%C3%A4ljak+15%2C+Keila",
-    embed: "https://www.google.com/maps?q=Keskv%C3%A4ljak+15%2C+Keila&z=16&output=embed",
+    link: "https://maps.app.goo.gl/Pm7U2x4DLtvxNmSn9",
+    embed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2036.4762469910804!2d24.420968912721126!3d59.308304112597654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4692bc7719100001%3A0x18b13b6d100f828d!2sKeskv%C3%A4ljak%2015%2C%20Keila%2C%2076608%20Harju%20maakond!5e0!3m2!1sen!2see!4v1788538439730!5m2!1sen!2see",
   },
 } as const;
 

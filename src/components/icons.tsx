@@ -112,6 +112,23 @@ export function CheckCircleIcon(props: IconProps) {
   );
 }
 
+export function ExternalLinkIcon(props: IconProps) {
+  return (
+    <Base size={18} {...props}>
+      <path d="M14 4h6v6M20 4l-9 9M18 13v5.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H11" />
+    </Base>
+  );
+}
+
+export function AccessibilityIcon(props: IconProps) {
+  return (
+    <Base size={18} {...props}>
+      <circle cx="12" cy="4.5" r="1.6" />
+      <path d="M5 9.5c4.7 1 9.3 1 14 0M12 9.8v4.7M12 14.5l-3.2 5.5M12 14.5l3.2 5.5" />
+    </Base>
+  );
+}
+
 export function DumbbellIcon(props: IconProps) {
   return (
     <Base size={18} {...props}>

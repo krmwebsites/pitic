@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
-import { ClockIcon, MailIcon, PhoneIcon, PinIcon } from "@/components/icons";
+import { AccessibilityIcon, ClockIcon, ExternalLinkIcon, MailIcon, PhoneIcon, PinIcon } from "@/components/icons";
 import { content } from "@/lib/content";
 import { initials, people } from "@/lib/people";
 import { site } from "@/lib/site";
@@ -13,157 +12,169 @@ export const metadata: Metadata = {
 };
 
 const channels = [
-  {
-    icon: PinIcon,
-    label: "Aadress",
-    value: site.address.full,
-    href: site.maps.link,
-    external: true,
-  },
-  { icon: PhoneIcon, label: "Telefon", value: site.phone.display, href: site.phone.href },
-  { icon: MailIcon, label: "E-post", value: site.email.display, href: site.email.href },
+  { icon: PinIcon, label: site.address.full, href: site.maps.link, external: true },
+  { icon: PhoneIcon, label: site.phone.display, href: site.phone.href },
+  { icon: MailIcon, label: site.email.display, href: site.email.href },
+  { icon: ClockIcon, label: site.hours.label, href: null },
+];
+
+/** Asukoha omadused. Ainult kontrollitud faktid (content.json: „mugavalt ligipääsetav“). */
+const locationFacts = [
+  { icon: PinIcon, label: "Keila keskväljakul" },
+  { icon: AccessibilityIcon, label: "Mugav ligipääs" },
 ];
 
 /**
- * Layout-artifacti vaade 04: vasakul kolm kontaktisikut üksteise all (ümar pilt,
- * nimi, telefon, e-post) ja üldkontakt, paremal Google Mapsi kaart sama kõrgusega,
- * all eraldi riba aadressi ja andmetega. IBAN-id eskiisil olid poolikud ja neid ei kuvata.
+ * Kontakt: vasakul kontaktisikud (kaartidena) ja üldkontakt (2 × 2), paremal
+ * „Meie asukoht“ kaardiga, Google Mapsi lingiga ja asukoha omadustega.
+ * Mobiilis kõik üksteise all.
  */
 export default function ContactPage() {
   return (
-    <div className="wrap">
-      <div className="grid gap-10 py-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:py-16">
-        <div>
-          <h1>{content.contact.heading}</h1>
-          <p className="lead mt-5 max-w-prose">{content.contact.body}</p>
+    <div className="wrap pt-10 pb-12 lg:pt-14 lg:pb-16">
+      <div className="max-w-3xl">
+        <p className="eyebrow">{content.navigation[3].label}</p>
+        <h1 className="mt-3">{content.contact.heading}</h1>
+        <p className="lead mt-4">{content.contact.body}</p>
+        <span className="pill pill-soft mt-5">
+          <span className="size-2 rounded-full bg-sage" aria-hidden="true" />
+          Vastame tööpäeviti
+        </span>
+      </div>
 
-          {/* Kontaktisikud: ümar pilt vasakul, nimi + telefon + e-post kõrval. */}
-          <h2 className="mt-10 text-h3">Kontaktisikud</h2>
-          <ul className="mt-4 flex flex-col divide-y divide-line border-y border-line">
-            {people.map((person) => (
-              <li key={person.email} className="flex items-center gap-5 py-5">
-                {person.photo ? (
-                  <Image
-                    src={person.photo}
-                    alt={person.name}
-                    width={112}
-                    height={112}
-                    sizes="56px"
-                    className="size-14 shrink-0 rounded-full object-cover"
-                  />
-                ) : (
-                  <span
-                    className="flex size-14 shrink-0 items-center justify-center rounded-full bg-sage-soft text-sm font-medium text-sage"
-                    aria-hidden="true"
-                  >
-                    {initials(person.name)}
-                  </span>
-                )}
-                <span className="min-w-0">
-                  <span className="block text-lg font-medium text-ink">{person.name}</span>
-                  <span className="mt-0.5 flex flex-wrap gap-x-4 gap-y-0.5 text-[0.9375rem]">
+      <div className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1.85fr)_minmax(0,1fr)] lg:items-start lg:gap-6">
+        <div className="grid gap-5 lg:gap-6">
+          {/* Kontaktisikud */}
+          <section aria-labelledby="kontaktisikud" className="surface p-5 sm:p-6">
+            <h2 id="kontaktisikud" className="text-h3">
+              Kontaktisikud
+            </h2>
+            <ul className="mt-5 grid gap-3 md:grid-cols-3">
+              {people.map((person) => (
+                <li key={person.email} className="flex items-center gap-3 rounded-lg border border-line bg-surface p-3.5">
+                  {person.photo ? (
+                    <Image
+                      src={person.photo}
+                      alt={person.name}
+                      width={112}
+                      height={112}
+                      sizes="56px"
+                      className="size-12 shrink-0 rounded-full object-cover"
+                    />
+                  ) : (
+                    <span
+                      className="flex size-12 shrink-0 items-center justify-center rounded-full bg-sage-soft text-sm font-medium text-sage"
+                      aria-hidden="true"
+                    >
+                      {initials(person.name)}
+                    </span>
+                  )}
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[0.9375rem] leading-tight font-medium text-ink">{person.name}</span>
+                    <a href={`mailto:${person.email}`} className="link mt-0.5 block truncate text-sm">
+                      {person.email}
+                    </a>
                     {person.phone && (
-                      <a href={`tel:${person.phone.replace(/[^\d+]/g, "")}`} className="link">
+                      <a href={`tel:${person.phone.replace(/[^\d+]/g, "")}`} className="link block text-sm">
                         {person.phone}
                       </a>
                     )}
-                    <a href={`mailto:${person.email}`} className="link break-all">
-                      {person.email}
-                    </a>
                   </span>
-                </span>
-              </li>
-            ))}
-          </ul>
-
-          <h2 className="mt-10 text-h3">Üldkontakt</h2>
-          <ul className="mt-4 flex flex-col divide-y divide-line border-y border-line">
-            {channels.map((channel) => {
-              const Icon = channel.icon;
-              return (
-                <li key={channel.label} className="flex items-center gap-5 py-5">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-sage">
-                    <Icon size={20} />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="meta block">{channel.label}</span>
-                    <a
-                      href={channel.href}
-                      className="link text-lg font-medium break-words"
-                      {...(channel.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    >
-                      {channel.value}
-                    </a>
-                  </span>
+                  <a
+                    href={`mailto:${person.email}`}
+                    aria-label={`Kirjuta: ${person.name}`}
+                    className="hidden size-10 shrink-0 items-center justify-center rounded-md border border-line text-sage transition-colors hover:bg-sage-soft 2xl:flex"
+                  >
+                    <MailIcon size={18} />
+                  </a>
                 </li>
-              );
-            })}
-            <li className="flex items-center gap-5 py-5">
-              <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-sage">
-                <ClockIcon size={20} />
-              </span>
-              <span>
-                <span className="meta block">Avatud</span>
-                <span className="text-lg font-medium text-ink">{site.hours.label}</span>
-              </span>
-            </li>
-          </ul>
+              ))}
+            </ul>
+          </section>
 
-          <Link href="/broneerimine" className="btn btn-primary mt-8">
-            {content.hero.secondaryCta}
-          </Link>
+          {/* Üldkontakt */}
+          <section aria-labelledby="uldkontakt" className="surface p-5 sm:p-6">
+            <h2 id="uldkontakt" className="text-h3">
+              Üldkontakt
+            </h2>
+            <ul className="mt-5 grid overflow-hidden rounded-lg border border-line sm:grid-cols-2">
+              {channels.map((channel, index) => {
+                const Icon = channel.icon;
+                const inner = (
+                  <>
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sage-soft text-sage">
+                      <Icon size={18} />
+                    </span>
+                    <span className="min-w-0 truncate text-[0.9375rem] text-ink">{channel.label}</span>
+                  </>
+                );
+                return (
+                  <li
+                    key={channel.label}
+                    className={`flex items-center gap-3 px-4 py-3.5 ${index > 0 ? "border-t border-line" : ""} ${
+                      index >= 2 ? "sm:border-t" : "sm:border-t-0"
+                    } ${index % 2 === 1 ? "sm:border-l sm:border-line" : ""}`}
+                  >
+                    {channel.href ? (
+                      <a
+                        href={channel.href}
+                        className="flex min-w-0 items-center gap-3 transition-colors hover:text-sage"
+                        {...(channel.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      >
+                        {inner}
+                      </a>
+                    ) : (
+                      inner
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
         </div>
 
-        <div className="flex flex-col">
-          <div className="surface relative min-h-[22rem] flex-1 overflow-hidden sm:min-h-[26rem]">
+        {/* Meie asukoht */}
+        <section aria-labelledby="asukoht" className="surface p-5 sm:p-6">
+          <h2 id="asukoht" className="text-h3">
+            Meie asukoht
+          </h2>
+          <div className="relative mt-5 aspect-[4/3] overflow-hidden rounded-lg border border-line bg-surface-hover">
             <iframe
               src={site.maps.embed}
               title={`Pitici asukoht kaardil: ${site.address.full}`}
               loading="lazy"
               allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerPolicy="strict-origin-when-cross-origin"
               className="absolute inset-0 h-full w-full border-0"
             />
           </div>
-          <p className="meta mt-3">
-            <a href={site.maps.link} target="_blank" rel="noopener noreferrer" className="link">
-              Ava Google Mapsis
-            </a>
-          </p>
-        </div>
+          <a
+            href={site.maps.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-secondary btn-block mt-4 justify-between"
+          >
+            <span className="flex-1 text-center">Ava Google Mapsis</span>
+            <ExternalLinkIcon size={18} />
+          </a>
+          <ul className="mt-5 grid grid-cols-2 border-t border-line pt-5">
+            {locationFacts.map((fact, index) => {
+              const Icon = fact.icon;
+              return (
+                <li
+                  key={fact.label}
+                  className={`flex items-center gap-3 text-[0.9375rem] text-ink ${index > 0 ? "border-l border-line pl-4" : "pr-4"}`}
+                >
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-sage/40 text-sage">
+                    <Icon size={18} />
+                  </span>
+                  {fact.label}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
       </div>
-
-      {/* Alumine riba: aadress, e-post ja telefon, lahtiolekuajad. */}
-      <dl className="grid gap-8 border-t border-line py-8 sm:grid-cols-3 lg:py-10">
-        <div>
-          <dt className="meta">Aadress</dt>
-          <dd className="mt-1 text-ink">
-            {site.address.street}
-            <br />
-            {site.address.city}, {site.address.county}
-          </dd>
-        </div>
-        <div>
-          <dt className="meta">E-post ja telefon</dt>
-          <dd className="mt-1 text-ink">
-            <a href={site.email.href} className="link">
-              {site.email.display}
-            </a>
-            <br />
-            <a href={site.phone.href} className="link">
-              {site.phone.display}
-            </a>
-          </dd>
-        </div>
-        <div>
-          <dt className="meta">Avatud</dt>
-          <dd className="mt-1 text-ink">
-            {site.hours.days}
-            <br />
-            {site.hours.label.replace("E–R ", "")}
-          </dd>
-        </div>
-      </dl>
     </div>
   );
 }
