@@ -33,19 +33,18 @@ npx tsc --noEmit && npm run lint && npm run build
 | `src/components/reactbits/` | React Bits komponendid (Blur Text, Spotlight Card, Count Up), kohandatud meie tokenitele; sõltuvus `motion`. |
 | `src/app/` | Lehed: `/` (hero + ruumid `#ruumid`), `/ruumide-rent/[ruum]`, `/broneerimine`, `/kontakt`, `/privaatsus`, `/kasutustingimused`. `/ruumide-rent` suunatakse `/#ruumid`. |
 | `public/brand/` | Ametlik logo (originaal, päise lõige ilma tagline'ita, valge versioon footerisse). |
-| `public/fotod/` | Fotod (praegu näidisfotod). |
+| `public/fotod/` | Fotod: ruumide galeriid (5 vaadet ruumi kohta) ja avalehe hero (näidis). |
 
 ## Fotod
 
-Kaustas `public/fotod` on praegu **näidisfotod**, mis on lõigatud disaini reference-mockupist.
-Need ei ole Pitici päris ruumid ja kannavad lehel silti „Näidisfoto“. Enne avaldamist:
+Kaustas `public/fotod` on ruumide galeriid: `jousaal-1..5.webp`, `noupidamiste-ruum-1..5.webp`,
+`suursaal-1..5.webp` (1536 × 1024, esimene on ruumi põhifoto kaartidel). Uue foto lisamiseks pane
+fail kausta ja lisa alt-tekst vastavasse massiivi failis `src/lib/photos.ts`; fotode arv on vaba.
 
-1. asenda failid `hero-space.webp`, `room-gym.webp`, `room-meeting.webp`, `room-hall.webp`
-   päris fotodega (kuvasuhe 4:3, hero võib olla laiem); ruumi galerii lisafotod
-   (`room-*-2.webp`) on praegu sama foto lähivaated, lisa nende asemele päris fotod ja
-   täienda `galleries` massiive failis `src/lib/photos.ts` (fotode arv on vaba);
-2. uuenda `src/lib/photos.ts`-is mõõdud, alt-tekstid ja pane `placeholder: false`;
-3. loo Open Graphi pilt päris fotoga (`src/app/opengraph-image.png`, 1200 × 630).
+Avalehe hero-pilt `hero-space.webp` on veel **näidisfoto** (silt „Näidisfoto“). Enne avaldamist:
+
+1. asenda see päris fotoga ja pane `src/lib/photos.ts`-is `placeholder: false`;
+2. loo Open Graphi pilt päris fotoga (`src/app/opengraph-image.png`, 1200 × 630).
 
 ## Broneerimine
 

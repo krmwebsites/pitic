@@ -139,7 +139,7 @@ export function RoomGallery({ photos, roomName, className = "" }: Props) {
               <CloseIcon />
             </button>
           </div>
-          <div className="relative flex min-h-0 flex-1 items-center justify-center" onClick={(event) => event.stopPropagation()}>
+          <div className="relative min-h-0 flex-1 py-3 sm:px-14" onClick={(event) => event.stopPropagation()}>
             <Image
               key={`large-${photo.src}`}
               src={photo.src}
@@ -147,7 +147,7 @@ export function RoomGallery({ photos, roomName, className = "" }: Props) {
               width={photo.width}
               height={photo.height}
               sizes="100vw"
-              className="max-h-full w-auto max-w-full rounded-md object-contain"
+              className="h-full w-full rounded-md object-contain"
             />
             {count > 1 && (
               <>

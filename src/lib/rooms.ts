@@ -1,5 +1,5 @@
 import { content } from "./content";
-import { galleries, photos, type Photo } from "./photos";
+import { galleries, type Photo } from "./photos";
 
 /**
  * Pitici renditavad ruumid. Nimed ja mahutavus tulevad heaks kiidetud
@@ -36,7 +36,7 @@ const extras: Record<string, Extra> = {
     description:
       "Jõusaal sobib personaaltreeninguteks ja väikeste rühmade treeninguteks kuni 8 inimesele. Ruum broneeritakse ainult sinu seltskonnale.",
     suitedFor: ["Personaaltreeningud", "Väikerühmade treeningud", "Treenerite kliendiajad"],
-    photo: photos.gym,
+    photo: galleries.jousaal[0],
     gallery: [...galleries.jousaal],
   },
   "meeting-room": {
@@ -46,7 +46,7 @@ const extras: Record<string, Extra> = {
     description:
       "Nõupidamiste ruum on mõeldud koosolekuteks, läbirääkimisteks ja väiksemateks koolitusteks kuni 12 osalejale.",
     suitedFor: ["Koosolekud ja läbirääkimised", "Väiksemad koolitused", "Töötoad ja intervjuud"],
-    photo: photos.meeting,
+    photo: galleries["noupidamiste-ruum"][0],
     gallery: [...galleries["noupidamiste-ruum"]],
   },
   "main-hall": {
@@ -56,7 +56,7 @@ const extras: Record<string, Extra> = {
     description:
       "Suursaal mahutab kuni 50 inimest ning sobib seminarideks, esitlusteks ja sündmusteks. Paigutuse lepime kokku vastavalt üritusele.",
     suitedFor: ["Seminarid ja koolitused", "Esitlused ja infopäevad", "Sündmused kuni 50 inimesele"],
-    photo: photos.hall,
+    photo: galleries.suursaal[0],
     gallery: [...galleries.suursaal],
   },
 };
