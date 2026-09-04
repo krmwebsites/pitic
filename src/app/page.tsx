@@ -41,7 +41,7 @@ export default function HomePage() {
             className="rise rise-4 aspect-[5/4] sm:aspect-[16/9] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:h-full lg:w-[60%]"
           />
 
-          <div className="relative z-10 mx-4 -mt-20 mb-4 rounded-lg bg-surface p-6 shadow-soft sm:mx-6 sm:-mt-24 sm:p-8 lg:m-8 lg:max-w-[46%] lg:p-9 xl:m-10 xl:max-w-[44%] xl:p-10">
+          <div className="relative z-10 mx-3 -mt-20 mb-3 rounded-lg bg-surface p-4 shadow-soft sm:mx-6 sm:-mt-24 sm:mb-4 sm:p-8 lg:m-8 lg:max-w-[46%] lg:p-9 xl:m-10 xl:max-w-[44%] xl:p-10">
             <div className="rise flex flex-wrap items-center justify-between gap-3">
               <p className="eyebrow">
                 <PinIcon size={18} />
@@ -71,17 +71,17 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <ul className="rise rise-4 mt-7 flex justify-between border-t border-line pt-5 sm:justify-start" aria-label="Sobib">
+            <ul className="rise rise-4 mt-7 flex flex-wrap justify-between gap-y-2 border-t border-line pt-5 sm:justify-start" aria-label="Sobib">
               {USES.map((use, index) => {
                 const Icon = use.icon;
                 return (
                   <li
                     key={use.label}
-                    className={`flex items-center gap-1.5 text-sm text-body sm:gap-2 sm:pr-5 sm:text-[0.9375rem] ${
-                      index > 0 ? "border-l border-line pl-3 sm:pl-5" : ""
+                    className={`flex items-center gap-1 text-[0.8125rem] text-body sm:gap-2 sm:pr-5 sm:text-[0.9375rem] ${
+                      index > 0 ? "sm:border-l sm:border-line sm:pl-5" : ""
                     }`}
                   >
-                    <Icon size={18} className="shrink-0 text-sage" />
+                    <Icon size={18} className="size-4 shrink-0 text-sage sm:size-[18px]" />
                     {use.label}
                   </li>
                 );
