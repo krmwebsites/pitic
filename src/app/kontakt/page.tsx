@@ -5,8 +5,9 @@ import { content } from "@/lib/content";
 import { initials, people } from "@/lib/people";
 import { site } from "@/lib/site";
 
+/* navigation[4] = „Kontakt“ (0 Avaleht, 1 Ruumid, 2 Meist, 3 Broneerimine, 4 Kontakt). */
 export const metadata: Metadata = {
-  title: content.navigation[3].label,
+  title: content.navigation[4].label,
   description: `${content.contact.body} ${site.address.full}, ${site.phone.display}, ${site.email.display}.`,
   alternates: { canonical: "/kontakt" },
 };
@@ -35,7 +36,7 @@ export default function ContactPage() {
     <div className="wrap pt-6 pb-8 lg:pt-7 lg:pb-6">
       <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
         <div>
-          <p className="eyebrow">{content.navigation[3].label}</p>
+          <p className="eyebrow">{content.navigation[4].label}</p>
           <h1 className="mt-2 text-h2">{content.contact.heading}</h1>
           <p className="lead mt-2">{content.contact.body}</p>
         </div>
