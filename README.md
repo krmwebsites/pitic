@@ -29,7 +29,8 @@ npx tsc --noEmit && npm run lint && npm run build
 | `src/lib/booking.ts` | Broneerimise avalik seadistus ja API tüübid. |
 | `src/lib/server/simplybook.ts` | SimplyBook.me API klient (ainult server, API-võti). |
 | `src/app/api/booking/` | Otspunktid: saadavus ja broneeringu loomine. |
-| `src/components/booking/` | Broneerimiskaart (kalender, ajad, andmed, kinnitus) ja varulahendus. |
+| `src/components/booking/` | Broneerimine: otsing (`booking-search`), ühe ruumi kaart (`booking-flow`), jagatud sammud ja vorm. |
+| `src/components/reactbits/` | React Bits komponendid (Blur Text, Spotlight Card, Count Up), kohandatud meie tokenitele; sõltuvus `motion`. |
 | `src/app/` | Lehed: `/`, `/ruumide-rent`, `/ruumide-rent/[ruum]`, `/broneerimine`, `/kontakt`, `/privaatsus`, `/kasutustingimused`. |
 | `public/brand/` | Ametlik logo (originaal, päise lõige ilma tagline'ita, valge versioon footerisse). |
 | `public/fotod/` | Fotod (praegu näidisfotod). |

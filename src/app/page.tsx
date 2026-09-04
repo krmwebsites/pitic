@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarCheckIcon, ClockIcon, PinIcon } from "@/components/icons";
 import { Photo } from "@/components/photo";
+import { BlurText } from "@/components/reactbits/blur-text";
 import { Reveal } from "@/components/reveal";
 import { RoomCard } from "@/components/room-card";
 import { content } from "@/lib/content";
@@ -19,11 +20,10 @@ export default function HomePage() {
     <>
       {/* Hero: tekst vasakul (u 40 %), foto paremal (u 60 %), mobiilis tekst enne fotot. */}
       <section aria-labelledby="hero-pealkiri" className="wrap">
-        <div className="grid items-center gap-10 py-10 lg:min-h-[37.5rem] lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16 lg:py-0">
+        <div className="grid items-center gap-10 py-10 lg:min-h-[37.5rem] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16 lg:py-0">
           <div className="lg:py-16">
-            <h1 id="hero-pealkiri" className="rise max-w-[16ch]">
-              {content.hero.heading}
-            </h1>
+            {/* React Bits „Blur Text“: sõnad ilmuvad hägust, üks tagasihoidlik stagger. */}
+            <BlurText as="h1" id="hero-pealkiri" text={content.hero.heading} className="max-w-[6.9em] text-[clamp(2.625rem,1.4rem+3.4vw,4.25rem)] text-wrap" />
             <p className="lead rise rise-2 mt-6 max-w-[34ch]">{content.hero.body}</p>
             <div className="rise rise-3 mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/ruumide-rent" className="btn btn-primary">

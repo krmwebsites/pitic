@@ -112,6 +112,15 @@ export function CheckCircleIcon(props: IconProps) {
   );
 }
 
+export function TagIcon(props: IconProps) {
+  return (
+    <Base size={18} {...props}>
+      <path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7a1 1 0 0 1 .7.3l7.3 7.3a1 1 0 0 1 0 1.4l-7.4 7.4a1 1 0 0 1-1.4 0l-7.6-7.6a1 1 0 0 1-.3-.8Z" />
+      <circle cx="8" cy="8" r="1.4" />
+    </Base>
+  );
+}
+
 export function UsersIcon(props: IconProps) {
   return (
     <Base size={18} {...props}>
