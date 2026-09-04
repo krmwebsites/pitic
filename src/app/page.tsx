@@ -29,20 +29,20 @@ export default function HomePage() {
   return (
     <>
       {/*
-        Hero: ümarate nurkadega konteiner, milles foto täidab desktopil kogu
-        ala ja valge kaart asetseb foto peal vasakul; mobiilis on kaart foto
-        all, kattes foto alumist serva.
+        Hero: ümarate nurkadega konteiner; desktopil tekstiplokk vasakus veerus
+        ja foto paremas veerus kõrvuti (ilma kattumiseta), mobiilis foto
+        üleval ja kaart selle all, kattes foto alumist serva.
       */}
       <section aria-labelledby="hero-pealkiri" className="wrap pt-4 lg:pt-6">
-        <div className="relative flex min-h-[calc(100svh-6.5rem)] flex-col overflow-hidden rounded-xl bg-surface-hover lg:h-[calc(100svh-8rem)] lg:min-h-[26rem] lg:flex-row lg:items-center">
+        <div className="relative flex min-h-[calc(100svh-6.5rem)] flex-col overflow-hidden rounded-xl bg-surface-hover lg:h-[calc(100svh-8rem)] lg:min-h-[26rem] lg:flex-row lg:items-stretch lg:border lg:border-line lg:bg-surface">
           <Photo
             photo={photos.hero}
             priority
-            sizes="100vw"
-            className="rise rise-4 min-h-[15rem] flex-1 lg:absolute lg:inset-0 lg:h-full lg:w-full lg:flex-none"
+            sizes="(min-width: 1024px) 52vw, 100vw"
+            className="rise rise-4 min-h-[15rem] flex-1 lg:order-2 lg:h-full lg:w-[52%] lg:flex-none"
           />
 
-          <div className="relative z-10 mx-3 -mt-20 mb-3 shrink-0 rounded-lg bg-surface p-4 shadow-soft sm:mx-6 sm:-mt-24 sm:mb-4 sm:p-8 lg:m-8 lg:max-w-[46%] lg:p-9 xl:m-10 xl:max-w-[44%] xl:p-10">
+          <div className="relative z-10 mx-3 -mt-20 mb-3 shrink-0 rounded-lg bg-surface p-4 shadow-soft sm:mx-6 sm:-mt-24 sm:mb-4 sm:p-8 lg:order-1 lg:m-0 lg:flex lg:w-[48%] lg:flex-col lg:justify-center lg:rounded-none lg:px-9 lg:py-8 lg:shadow-none xl:px-12">
             <div className="rise flex flex-wrap items-center justify-between gap-3">
               <p className="eyebrow">
                 <PinIcon size={18} />
