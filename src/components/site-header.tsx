@@ -13,6 +13,8 @@ type HomeSection = "hero" | "ruumid";
 
 function activeHref(pathname: string, section: HomeSection) {
   if (pathname === "/") return section === "ruumid" ? "/#ruumid" : "/";
+  // Ruumi detailvaade kuulub „Ruumid“ alla.
+  if (pathname.startsWith("/ruumide-rent")) return "/#ruumid";
   const match = nav.find((item) => item.href !== "/" && !item.href.startsWith("/#") && pathname.startsWith(item.href));
   return match?.href ?? null;
 }
