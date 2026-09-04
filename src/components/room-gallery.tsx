@@ -13,7 +13,9 @@ type Props = {
 };
 
 /**
- * Ruumi galerii: suur pilt nooltega, loendur, pisipildid ja täisekraanivaade.
+ * Ruumi galerii: suur pilt vasakul (nooled all nurkades), pisipildid
+ * püstises keritavas veerus paremal ja loendur veeru all; mobiilis on
+ * pisipildid reas suure pildi all. Pildile klõps avab täisekraanivaate.
  * Klaviatuur: nooled vahetavad pilti, Escape sulgeb täisekraani.
  */
 export function RoomGallery({ photos, roomName, className = "" }: Props) {
@@ -21,10 +23,22 @@ export function RoomGallery({ photos, roomName, className = "" }: Props) {
   const [open, setOpen] = useState(false);
   const openerRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const count = photos.length;
   const photo = photos[index] ?? photos[0];
 
-  const go = useCallback((delta: number) => setIndex((i) => (i + delta + count) % count), [count]);
+  const go = useCallback(
+    (delta: number) => setIndex((i) => (i + delta + count) % count),
+    [count],
+  );
+
+  // Aktiivne pisipilt jääb keritavas veerus/reas nähtavale.
+  useEffect(() => {
+    thumbRefs.current[index]?.scrollIntoView({
+      block: "nearest",
+      inline: "nearest",
+    });
+  }, [index]);
 
   // Klaviatuur: nooled (alati), Escape (täisekraan). Täisekraanis lehte ei kerita.
   useEffect(() => {
@@ -54,68 +68,101 @@ export function RoomGallery({ photos, roomName, className = "" }: Props) {
         go(direction);
       }}
       aria-label={direction < 0 ? "Eelmine pilt" : "Järgmine pilt"}
-      className={`flex size-10 items-center justify-center rounded-full border border-line bg-surface/90 text-ink shadow-soft backdrop-blur transition-colors hover:bg-surface ${extra}`}
+      className={`flex size-11 items-center justify-center rounded-full border border-line bg-surface/95 text-ink shadow-soft backdrop-blur transition-colors hover:bg-surface ${extra}`}
     >
       {direction < 0 ? <ArrowLeftIcon /> : <ArrowRightIcon />}
     </button>
   );
 
+  const counter = (
+    <span
+      className="inline-flex shrink-0 self-end rounded-md bg-ink px-3 py-1.5 text-sm font-medium text-white tabular-nums"
+      aria-live="polite"
+    >
+      {index + 1} / {count}
+    </span>
+  );
+
   return (
     <div>
-      <div className={`group relative overflow-hidden rounded-md border border-line bg-surface-hover ${className}`}>
-        <button
-          ref={openerRef}
-          type="button"
-          onClick={() => setOpen(true)}
-          className="block h-full w-full cursor-zoom-in"
-          aria-label={`Ava suurelt: ${photo.alt}`}
+      <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_7.5rem]">
+        {/* Suur pilt */}
+        <div
+          className={`group relative overflow-hidden rounded-md border border-line bg-surface-hover ${className}`}
         >
-          <Image
-            key={photo.src}
-            src={photo.src}
-            alt={photo.alt}
-            width={photo.width}
-            height={photo.height}
-            priority={index === 0}
-            sizes="(min-width: 1024px) 55vw, 100vw"
-            className="h-full w-full object-cover"
-          />
-        </button>
-        {photo.placeholder && (
-          <span className="pointer-events-none absolute bottom-3 left-3 rounded-sm bg-surface/90 px-2 py-1 text-xs text-muted">
-            Näidisfoto
-          </span>
-        )}
-        {count > 1 && (
-          <>
-            <div className="absolute inset-y-0 left-3 flex items-center">{arrow(-1)}</div>
-            <div className="absolute inset-y-0 right-3 flex items-center">{arrow(1)}</div>
-            <span className="pointer-events-none absolute right-3 bottom-3 rounded-full bg-ink/70 px-2.5 py-1 text-xs font-medium text-white tabular-nums" aria-live="polite">
-              {index + 1} / {count}
+          <button
+            ref={openerRef}
+            type="button"
+            onClick={() => setOpen(true)}
+            className="relative block h-full w-full cursor-zoom-in"
+            aria-label={`Ava suurelt: ${photo.alt}`}
+          >
+            {/* Absoluutne, et pildi loomulik kõrgus ei venitaks ruudustiku rida: kõrguse annab kuvasuhe või lg-kõrgus. */}
+            <Image
+              key={photo.src}
+              src={photo.src}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              priority={index === 0}
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </button>
+          {photo.placeholder && (
+            <span className="pointer-events-none absolute top-3 left-3 rounded-sm bg-surface/90 px-2 py-1 text-xs text-muted">
+              Näidisfoto
             </span>
-          </>
+          )}
+          {count > 1 && (
+            <>
+              <div className="absolute bottom-4 left-4">{arrow(-1)}</div>
+              <div className="absolute right-4 bottom-4">{arrow(1)}</div>
+            </>
+          )}
+        </div>
+
+        {/* Pisipildid: mobiilis rida, sm+ püstine veerg suure pildi kõrgusega; loendur veeru all. */}
+        {count > 1 && (
+          <div className="relative min-w-0 sm:min-h-0">
+            <div className="flex flex-col gap-3 sm:absolute sm:inset-0">
+              <ul
+                className="-mx-1 flex gap-2.5 overflow-x-auto px-1 sm:mx-0 sm:min-h-0 sm:flex-1 sm:flex-col sm:gap-3 sm:overflow-x-hidden sm:overflow-y-auto sm:px-0 sm:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                aria-label={`${roomName}: fotod`}
+              >
+                {photos.map((item, i) => (
+                  <li key={item.src} className="w-[5.5rem] shrink-0 sm:w-full">
+                    <button
+                      ref={(el) => {
+                        thumbRefs.current[i] = el;
+                      }}
+                      type="button"
+                      onClick={() => setIndex(i)}
+                      aria-label={`Pilt ${i + 1}: ${item.alt}`}
+                      aria-current={i === index ? "true" : undefined}
+                      className={`block w-full overflow-hidden rounded-sm border-2 transition-colors ${
+                        i === index
+                          ? "border-sage"
+                          : "border-transparent hover:border-line-strong"
+                      }`}
+                    >
+                      <Image
+                        src={item.src}
+                        alt=""
+                        width={item.width}
+                        height={item.height}
+                        sizes="120px"
+                        className="aspect-[4/3] w-full object-cover"
+                      />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex shrink-0 justify-end">{counter}</div>
+            </div>
+          </div>
         )}
       </div>
-
-      {count > 1 && (
-        <ul className="-mx-1 mt-3 flex gap-2.5 overflow-x-auto px-1 pb-1" aria-label={`${roomName}: fotod`}>
-          {photos.map((item, i) => (
-            <li key={item.src} className="w-[5.5rem] shrink-0 sm:w-24">
-              <button
-                type="button"
-                onClick={() => setIndex(i)}
-                aria-label={`Pilt ${i + 1}: ${item.alt}`}
-                aria-current={i === index ? "true" : undefined}
-                className={`block w-full overflow-hidden rounded-sm border transition-colors ${
-                  i === index ? "border-sage ring-1 ring-sage" : "border-line hover:border-line-strong"
-                }`}
-              >
-                <Image src={item.src} alt="" width={item.width} height={item.height} sizes="200px" className="aspect-[3/2] w-full object-cover" />
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
 
       {open && (
         <div
@@ -139,7 +186,10 @@ export function RoomGallery({ photos, roomName, className = "" }: Props) {
               <CloseIcon />
             </button>
           </div>
-          <div className="relative min-h-0 flex-1 py-3 sm:px-14" onClick={(event) => event.stopPropagation()}>
+          <div
+            className="relative min-h-0 flex-1 py-3 sm:px-14"
+            onClick={(event) => event.stopPropagation()}
+          >
             <Image
               key={`large-${photo.src}`}
               src={photo.src}
@@ -151,8 +201,12 @@ export function RoomGallery({ photos, roomName, className = "" }: Props) {
             />
             {count > 1 && (
               <>
-                <div className="absolute inset-y-0 left-0 flex items-center">{arrow(-1)}</div>
-                <div className="absolute inset-y-0 right-0 flex items-center">{arrow(1)}</div>
+                <div className="absolute inset-y-0 left-0 flex items-center">
+                  {arrow(-1)}
+                </div>
+                <div className="absolute inset-y-0 right-0 flex items-center">
+                  {arrow(1)}
+                </div>
               </>
             )}
           </div>

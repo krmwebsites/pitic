@@ -55,7 +55,7 @@ export default async function RoomPage({ params }: RoomPageProps) {
             <RoomGallery
               photos={room.gallery}
               roomName={room.name}
-              className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-[clamp(18rem,calc(100svh-31.5rem),34rem)]"
+              className="aspect-[4/3] lg:aspect-auto lg:h-[clamp(20rem,calc(100svh-30rem),34rem)]"
             />
           </div>
 

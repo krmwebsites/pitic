@@ -1,19 +1,17 @@
 import Link from "next/link";
-import { ArrowRightIcon, ExternalLinkIcon, UsersIcon } from "@/components/icons";
+import { ArrowRightIcon, ExternalLinkIcon } from "@/components/icons";
 import { Photo } from "@/components/photo";
 import { Reveal } from "@/components/reveal";
-import { EquipmentList, FeatureList, RoomFeatureList, SuitedForList } from "@/components/room-features";
 import { content } from "@/lib/content";
 import { gymOperator, monogram, partners } from "@/lib/partners";
 import { photos } from "@/lib/photos";
-import { commonFeatures, roomHref, rooms } from "@/lib/rooms";
 import { site } from "@/lib/site";
 
 /**
  * „Meist“ (avalehe sektsioon, menüü „Meist“ kerib siia): maja tutvustus
- * hoovi poolt tehtud fotoga, kõigi ruumide omadused ja koostööpartnerid,
- * kes majas ruume rendivad. Jõusaali ruumi rendiga tegelev Rave Sport OÜ
- * on kirjas ainult siin (jõusaali enda kirjeldus jääb puutumata).
+ * hoovi poolt tehtud fotoga, kutse külla tulla (kontakti CTA) ja
+ * koostööpartnerid, kes majas ruume rendivad. Jõusaali ruumi rendiga
+ * tegelev Rave Sport OÜ on kirjas ainult siin.
  */
 export function AboutSection() {
   const meist = content.navigation[2].label;
@@ -32,53 +30,21 @@ export function AboutSection() {
               Pitic asub Keila keskväljakul, aadressil {site.address.full}. Ühes majas on renditavad jõusaal, nõupidamiste
               ruum ja suur saal ning siin tegutsevad ka mitmed kohalikud tegijad.
             </p>
-            <p className="mt-6 text-[0.9375rem] font-medium text-ink">Kõigi kolme ruumi juurde kuuluvad</p>
-            <FeatureList items={commonFeatures} label="Kõigi ruumide juurde kuulub" className="mt-3" />
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/#ruumid" className="btn btn-sage">
-                {content.hero.primaryCta}
-              </Link>
-              <Link href="/kontakt" className="btn btn-sage-outline">
-                {content.navigation[4].label}
-              </Link>
-            </div>
+
+            {/* Kutse: eristuv, must ja paks; all kontakti nupp. */}
+            <p className="mt-9 max-w-[20ch] text-[clamp(1.625rem,1.1rem+1.6vw,2.25rem)] leading-[1.15] font-semibold tracking-[-0.01em] text-ink text-balance">
+              Soovid lähemalt tutvuda?
+            </p>
+            <Link href="/kontakt" className="btn btn-primary mt-6">
+              Võta ühendust
+              <ArrowRightIcon size={18} />
+            </Link>
           </div>
           <Photo
             photo={photos.house}
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="aspect-[4/5] rounded-lg border border-line lg:aspect-auto lg:h-[clamp(22rem,55vh,32rem)]"
           />
-        </div>
-
-        {/* Ruumide tutvustus: omadused ja kasutusotstarbed. */}
-        <div className="mt-14 lg:mt-20">
-          <h3 className="text-h3">Ruumid majas</h3>
-          <ul className="mt-6 grid gap-5 md:grid-cols-3 lg:gap-6">
-            {rooms.map((room) => (
-              <li key={room.slug} className="surface flex flex-col p-5 sm:p-6">
-                <div className="flex items-start justify-between gap-3">
-                  <h4 className="text-[1.25rem] font-medium text-ink">
-                    <Link href={roomHref(room.slug)} className="transition-colors hover:text-sage">
-                      {room.name}
-                    </Link>
-                  </h4>
-                  <span className="pill pill-soft shrink-0">
-                    <UsersIcon size={16} />
-                    {room.capacityLabel}
-                  </span>
-                </div>
-                <p className="mt-2 text-[0.9375rem]">{room.tagline}</p>
-                <RoomFeatureList room={room} className="mt-4" />
-                <p className="mt-5 text-[0.9375rem] font-medium text-ink">Sobib</p>
-                <SuitedForList room={room} className="mt-2" />
-                <EquipmentList room={room} className="mt-4" />
-                <Link href={roomHref(room.slug)} className="arrow-link mt-auto pt-6 text-[0.9375rem]">
-                  {content.spacesSection.linkLabel}
-                  <ArrowRightIcon />
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
 
         {/* Koostööpartnerid. Logo puudumisel monogramm; tutvustuse puudumisel ainult nimi. */}
