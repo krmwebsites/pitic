@@ -10,7 +10,7 @@ export function SiteFooter() {
 
   return (
     <footer className="bg-ink text-canvas">
-      <div className="wrap grid gap-8 py-10 md:grid-cols-[1.3fr_1fr_1fr] md:items-start md:gap-12 lg:py-12">
+      <div className="wrap grid gap-10 py-14 md:grid-cols-[1.3fr_1fr_1fr] md:items-start md:gap-12 lg:py-16">
         <div>
           <Link href="/" className="inline-flex" aria-label="Pitic, avaleht">
             {/* Valge versioon on loodud originaalist alfakanalit muutmata, geomeetria on sama. */}
@@ -23,7 +23,7 @@ export function SiteFooter() {
               className="h-11 w-auto"
             />
           </Link>
-          <p className="mt-4">
+          <p className="mt-5">
             <a
               href={site.maps.link}
               target="_blank"
@@ -64,7 +64,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="wrap flex flex-col gap-2 py-4 text-sm text-canvas/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="wrap flex flex-col gap-2 py-5 text-sm text-canvas/60 sm:flex-row sm:items-center sm:justify-between">
           <span>{copyright}</span>
           <span className="flex gap-5">
             <Link href="/privaatsus" className="transition-colors hover:text-white">

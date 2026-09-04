@@ -14,8 +14,6 @@ type Props = {
    */
   variant?: "link" | "booking";
   priority?: boolean;
-  /** Avalehe kompaktne kaart: madalam foto (3:2) ja tihedam sisu. */
-  compact?: boolean;
 };
 
 /** Mahutavus: „Kuni 8 inimest“, number loetakse vaatevälja jõudes üles (React Bits Count Up). */
@@ -27,14 +25,14 @@ function Capacity({ room }: { room: Room }) {
   );
 }
 
-export function RoomCard({ room, variant = "link", priority, compact = false }: Props) {
+export function RoomCard({ room, variant = "link", priority }: Props) {
   const href = roomHref(room.slug);
   const photo = (
     <Photo
       photo={room.photo}
       priority={priority}
       sizes="(min-width: 1024px) 420px, (min-width: 640px) 50vw, 100vw"
-      className={`${compact ? "aspect-[3/2]" : "aspect-[4/3]"} border-b border-line`}
+      className="aspect-[4/3] border-b border-line"
       imgClassName="transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.03]"
     />
   );
@@ -75,12 +73,12 @@ export function RoomCard({ room, variant = "link", priority, compact = false }: 
     <SpotlightCard className="surface group h-full transition-colors hover:border-line-strong focus-within:border-line-strong">
       <Link href={href} className="flex h-full flex-col">
         {photo}
-        <span className={`flex flex-1 flex-col ${compact ? "p-5" : "p-6"}`}>
+        <span className="flex flex-1 flex-col p-6">
           <span className="text-h3 font-medium text-ink">{room.name}</span>
           <span className="meta mt-1">
             <Capacity room={room} />
           </span>
-          <span className={`arrow-link justify-between border-t border-line ${compact ? "mt-4 pt-4" : "mt-6 pt-5"}`}>
+          <span className="arrow-link mt-6 justify-between border-t border-line pt-5">
             {content.spacesSection.linkLabel}
             <ArrowRightIcon />
           </span>
