@@ -18,9 +18,10 @@ const highlightIcons = [PinIcon, ClockIcon, CalendarCheckIcon];
 export default function HomePage() {
   return (
     <>
-      {/* Hero: tekst vasakul (u 40 %), foto paremal (u 60 %), mobiilis tekst enne fotot. */}
+      {/* Hero: tekst vasakul (u 40 %), foto paremal (u 60 %), mobiilis tekst enne fotot.
+          Desktopil on hero kõrgus seotud vaateaknaga (päis + hero + inforiba mahuvad esimesse vaatesse). */}
       <section aria-labelledby="hero-pealkiri" className="wrap">
-        <div className="grid items-center gap-10 py-10 lg:min-h-[37.5rem] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16 lg:py-0">
+        <div className="grid items-center gap-10 py-10 lg:min-h-0 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16 lg:py-0">
           <div className="lg:py-16">
             {/* React Bits „Blur Text“: sõnad ilmuvad hägust, üks tagasihoidlik stagger. */}
             <BlurText as="h1" id="hero-pealkiri" text={content.hero.heading} className="max-w-[6.9em] text-[clamp(2.625rem,1.4rem+3.4vw,4.25rem)] text-wrap" />
@@ -38,7 +39,7 @@ export default function HomePage() {
             photo={photos.hero}
             priority
             sizes="(min-width: 1024px) 60vw, 100vw"
-            className="rise rise-4 bleed-right aspect-[4/3] rounded-md lg:aspect-auto lg:h-full lg:min-h-[34rem] lg:rounded-none"
+            className="rise rise-4 bleed-right aspect-[4/3] rounded-md lg:aspect-auto lg:h-[clamp(22rem,calc(100svh-11.5rem),36rem)] lg:rounded-none"
           />
         </div>
       </section>
