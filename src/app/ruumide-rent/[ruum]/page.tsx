@@ -66,7 +66,7 @@ export default async function RoomPage({ params }: RoomPageProps) {
             photo={room.photo}
             priority
             sizes="(min-width: 1024px) 55vw, 100vw"
-            className="mt-4 aspect-[16/9] rounded-md border border-line lg:aspect-auto lg:h-[clamp(12rem,calc(100svh-37rem),19rem)]"
+            className="mt-4 aspect-[16/9] rounded-md border border-line lg:aspect-auto lg:h-[clamp(11rem,calc(100svh-40rem),18rem)]"
           />
 
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
