@@ -3,19 +3,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type MouseEvent } from "react";
 import { content } from "@/lib/content";
 import { nav, site } from "@/lib/site";
 import { CloseIcon, MenuIcon } from "./icons";
 
-function isActive(pathname: string, href: string) {
-  return href === "/" ? pathname === "/" : pathname.startsWith(href);
+/** Avalehe sektsioonid, mille vahel menüü indikaator kerimisel liigub. */
+type HomeSection = "hero" | "ruumid";
+
+function activeHref(pathname: string, section: HomeSection) {
+  if (pathname === "/") return section === "ruumid" ? "/#ruumid" : "/";
+  const match = nav.find((item) => item.href !== "/" && !item.href.startsWith("/#") && pathname.startsWith(item.href));
+  return match?.href ?? null;
 }
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [openedAt, setOpenedAt] = useState(pathname);
+  const [section, setSection] = useState<HomeSection>("hero");
   const menuId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
@@ -45,6 +51,33 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  // Avalehel jälgib vaatleja, kas ruumide sektsioon on vaateakna ülemises pooles:
+  // siis on menüüs aktiivne „Ruumid“, muidu „Avaleht“.
+  useEffect(() => {
+    if (pathname !== "/") return;
+    const target = document.getElementById("ruumid")?.closest("section");
+    if (!target) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setSection(entry.isIntersecting ? "ruumid" : "hero"),
+      { rootMargin: "-40% 0px -60% 0px", threshold: 0 },
+    );
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  const current = activeHref(pathname, section);
+
+  /** „Avaleht“ avalehel: keri üles ilma navigeerimata (Link ise sama lehe algusesse ei keri). */
+  function onNavClick(event: MouseEvent<HTMLAnchorElement>, href: string) {
+    setOpen(false);
+    if (href === "/" && pathname === "/") {
+      event.preventDefault();
+      history.replaceState(null, "", "/");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setSection("hero");
+    }
+  }
+
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-md">
       <div className="wrap flex h-[4.5rem] items-center justify-between gap-6 lg:h-20">
@@ -64,12 +97,13 @@ export function SiteHeader() {
         <nav aria-label="Peamenüü" className="hidden lg:block">
           <ul className="flex items-center gap-9">
             {nav.map((item) => {
-              const active = isActive(pathname, item.href);
+              const active = item.href === current;
               return (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
+                    onClick={(event) => onNavClick(event, item.href)}
                     className={`inline-block py-2 text-[0.9375rem] font-medium underline-offset-[10px] transition-colors hover:text-ink ${
                       active ? "text-ink underline decoration-sage decoration-2" : "text-body"
                     }`}
@@ -108,15 +142,16 @@ export function SiteHeader() {
         <nav aria-label="Mobiilimenüü" className="wrap flex flex-col pt-2 pb-8">
           <ul className="flex flex-col">
             {nav.map((item, index) => {
-              const active = isActive(pathname, item.href);
+              const active = item.href === current;
               return (
                 <li key={item.href} className="border-b border-line">
                   <Link
                     ref={index === 0 ? firstLinkRef : undefined}
                     href={item.href}
                     aria-current={active ? "page" : undefined}
+                    onClick={(event) => onNavClick(event, item.href)}
                     className={`flex items-center justify-between py-4 text-xl font-medium transition-colors hover:text-sage ${
-                      active ? "text-sage" : "text-ink"
+                      active ? "text-sage underline decoration-sage decoration-2 underline-offset-8" : "text-ink"
                     }`}
                   >
                     {item.label}
@@ -126,7 +161,7 @@ export function SiteHeader() {
               );
             })}
           </ul>
-          <Link href="/broneerimine" className="btn btn-primary btn-block mt-6">
+          <Link href="/broneerimine" onClick={() => setOpen(false)} className="btn btn-primary btn-block mt-6">
             {content.hero.secondaryCta}
           </Link>
           <div className="meta mt-6 flex flex-col gap-2">

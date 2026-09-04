@@ -46,17 +46,17 @@ export function RoomCard({ room, variant = "link", priority, compact = false }: 
           <Link href={href} className="block" aria-label={`${room.name}: ${content.spacesSection.linkLabel}`}>
             {photo}
           </Link>
-          <div className="flex flex-1 flex-col p-6">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-h3">
+          <div className="flex flex-1 flex-col p-5 sm:p-6">
+            <div className="flex items-start justify-between gap-3">
+              <h2 className="min-w-0 text-h3">
                 <Link href={href} className="transition-colors hover:text-sage">
                   {room.name}
                 </Link>
               </h2>
               <CapacityPill room={room} />
             </div>
-            <p className="mt-3 text-[0.9375rem]">{room.description}</p>
-            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-line pt-5">
+            <p className="mt-3 flex-1 text-[0.9375rem]">{room.description}</p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-3 border-t border-line pt-5 sm:gap-x-6">
               <Link href={`${href}#broneeri`} className="btn btn-sage btn-sm">
                 {content.hero.secondaryCta}
               </Link>
