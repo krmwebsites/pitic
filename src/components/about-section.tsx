@@ -5,7 +5,6 @@ import { Reveal } from "@/components/reveal";
 import { content } from "@/lib/content";
 import { monogram, partners } from "@/lib/partners";
 import { photos } from "@/lib/photos";
-import { site } from "@/lib/site";
 
 /**
  * „Meist“ (avalehe sektsioon, menüü „Meist“ kerib siia): maja tutvustus
@@ -26,10 +25,13 @@ export function AboutSection() {
             <h2 id="meist-pealkiri" className="mt-3">
               {content.about.heading}
             </h2>
-            <p className="lead mt-4 max-w-[48ch]">
-              Pitic asub Keila keskväljakul, aadressil {site.address.full}. Ühes majas on renditavad jõusaal, nõupidamiste
-              ruum ja suur saal ning siin tegutsevad ka mitmed kohalikud tegijad.
-            </p>
+            <div className="mt-4 grid max-w-[58ch] gap-4">
+              {content.about.paragraphs.map((paragraph, index) => (
+                <p key={index} className={index === 0 ? "lead" : "text-[0.9375rem]"}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
 
             {/* Kutse: eristuv, must ja paks; all kontakti nupp. */}
             <p className="mt-9 max-w-[20ch] text-[clamp(1.625rem,1.1rem+1.6vw,2.25rem)] leading-[1.15] font-semibold tracking-[-0.01em] text-ink text-balance">
@@ -43,7 +45,7 @@ export function AboutSection() {
           <Photo
             photo={photos.house}
             sizes="(min-width: 1024px) 40vw, 100vw"
-            className="aspect-[4/5] rounded-lg border border-line lg:aspect-auto lg:h-[clamp(22rem,55vh,32rem)]"
+            className="aspect-[4/5] rounded-lg border border-line lg:aspect-auto lg:h-full lg:max-h-[38rem] lg:min-h-[26rem]"
           />
         </div>
 

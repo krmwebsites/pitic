@@ -69,7 +69,12 @@
     "fallbackBody": "Broneerimiseks kirjuta info@pitic.eu või helista 123-456-7890."
   },
   "about": {
-    "heading": "Sinu ruum Keila südames"
+    "heading": "Sinu ruum Keila südames",
+    "paragraphs": [
+      "Pitic asub otse Keila keskväljakul, aadressil Keskväljak 15. Mugavas ja hästi ligipääsetavas asukohas paiknev maja koondab ühe katuse alla mitmekülgsed rendiruumid ning erinevad kohalikud tegijad.",
+      "Majast leiad privaatse jõusaali, nõupidamiste ruumi ja avara suure saali. Ruumid sobivad treeninguteks, koosolekuteks, koolitusteks, seminarideks, töötubadeks ning väiksemate ja suuremate sündmuste korraldamiseks. Iga ruumi saab broneerida lihtsalt veebis vastavalt sobivale kuupäevale ja kellaajale.",
+      "Lisaks rendiruumidele tegutsevad Keskväljak 15 majas mitmed ettevõtted ja organisatsioonid, kes pakuvad kohalikele elanikele erinevaid teenuseid ja tegevusi. Nii on Pitic rohkem kui lihtsalt ruumide rentimise koht – see on tegus maja Keila südames, kus saavad kokku inimesed, ideed ja uued võimalused."
+    ]
   },
   "contact": {
     "heading": "Tule külla või võta ühendust",
