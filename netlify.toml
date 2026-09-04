@@ -1,0 +1,9 @@
+# Netlify: Next.js 16 (App Router + route handlers) Netlify Next Runtime'iga.
+# Keskkonnamuutujad seadista Netlify halduses (Site configuration -> Environment variables),
+# vt README.md jaotist „Avaldamine Netlifysse“.
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

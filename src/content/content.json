@@ -1,0 +1,83 @@
+{
+  "brand": {
+    "name": "Pitic",
+    "address": "Keskväljak 15, Keila",
+    "openingHours": "E–R 9:00–17:00",
+    "phone": "123-456-7890",
+    "email": "info@pitic.eu"
+  },
+  "navigation": [
+    { "label": "Avaleht", "href": "#avaleht" },
+    { "label": "Ruumid", "href": "#ruumid" },
+    { "label": "Broneerimine", "href": "#broneerimine" },
+    { "label": "Kontakt", "href": "#kontakt" }
+  ],
+  "hero": {
+    "heading": "Kõik vajalik ühe katuse all.",
+    "body": "Ruumid treeninguteks, kohtumisteks ja sündmusteks Keila keskväljakul.",
+    "primaryCta": "Vaata ruume",
+    "secondaryCta": "Broneeri ruum"
+  },
+  "highlights": [
+    {
+      "title": "Keskväljak 15, Keila",
+      "body": "Keila keskväljakul, mugavalt ligipääsetav"
+    },
+    {
+      "title": "E–R 9:00–17:00",
+      "body": "Oleme avatud tööpäevadel"
+    },
+    {
+      "title": "Mugav veebibroneerimine",
+      "body": "Vali ruum, aeg ja broneeri paari klikiga"
+    }
+  ],
+  "spacesSection": {
+    "heading": "Leia sobiv ruum",
+    "body": "Erinevad ruumid vastavalt sinu vajadusele.",
+    "linkLabel": "Vaata lähemalt"
+  },
+  "spaces": [
+    {
+      "id": "gym",
+      "name": "Jõusaal",
+      "capacity": "Kuni 8 inimest",
+      "image": "room-gym.webp"
+    },
+    {
+      "id": "meeting-room",
+      "name": "Nõupidamiste ruum",
+      "capacity": "Kuni 12 inimest",
+      "image": "room-meeting.webp"
+    },
+    {
+      "id": "main-hall",
+      "name": "Suursaal",
+      "capacity": "Kuni 50 inimest",
+      "image": "room-hall.webp"
+    }
+  ],
+  "booking": {
+    "heading": "Broneeri endale sobiv aeg",
+    "body": "Vali ruum, kuupäev ja kellaaeg ning jätka broneeringuga.",
+    "steps": ["Vali ruum", "Vali kuupäev", "Vali kellaaeg"],
+    "continueLabel": "Jätka",
+    "availableLabel": "Vaba aeg",
+    "fallbackHeading": "Veebibroneerimine on seadistamisel",
+    "fallbackBody": "Broneerimiseks kirjuta info@pitic.eu või helista 123-456-7890."
+  },
+  "contact": {
+    "heading": "Tule külla või võta ühendust",
+    "body": "Asume Keila keskväljakul. Võta ühendust või broneeri sobiv ruum veebis."
+  },
+  "footer": {
+    "privacyLabel": "Privaatsus",
+    "termsLabel": "Kasutustingimused",
+    "copyrightTemplate": "© {year} Pitic. Kõik õigused kaitstud."
+  },
+  "seo": {
+    "title": "Pitic | Ruumide rent Keila keskväljakul",
+    "description": "Broneeri Piticu jõusaal, nõupidamiste ruum või suursaal mugavalt Keila keskväljakul."
+  }
+}
+

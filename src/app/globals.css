@@ -1,0 +1,356 @@
+@import "tailwindcss";
+
+/*
+  Pitici kujundussüsteem. Väärtused pärinevad handoffi failist design-tokens.css:
+  soe hele canvas, valged pinnad, charcoal tekst ja tumenupud, salvei aktsent
+  ainult valiku/saadavuse/olulise tegevuse tähistamiseks.
+*/
+@theme {
+  --color-canvas: #f6f5f1;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f0f0eb;
+  --color-ink: #121412;
+  --color-ink-hover: #2a2d2a;
+  --color-body: #3e423e;
+  --color-muted: #737870;
+  --color-line: #dcddd7;
+  --color-line-strong: #c4c7c0;
+  --color-field-border: #c9cbc5;
+  --color-sage: #405847;
+  --color-sage-hover: #33483a;
+  --color-sage-soft: #e8ede8;
+  --color-warm-stone: #b59a78;
+  --color-error: #a43d38;
+  --color-success: #356345;
+
+  --font-sans: var(--font-instrument-sans), "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.35vw, 1.3125rem);
+  --text-lead--line-height: 1.5;
+  --text-h3: clamp(1.375rem, 1.2rem + 0.55vw, 1.75rem);
+  --text-h3--line-height: 1.18;
+  --text-h2: clamp(2rem, 1.55rem + 1.65vw, 3rem);
+  --text-h2--line-height: 1.1;
+  --text-display: clamp(2.625rem, 1.65rem + 3.6vw, 4.75rem);
+  --text-display--line-height: 1.02;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+
+  --shadow-soft: 0 18px 50px rgb(18 20 18 / 0.07);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Kleepuv päis (5rem) ei tohi katta ankrusihtmärki ega fookust. */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background: var(--color-canvas);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-ink);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  h1 {
+    font-size: var(--text-display);
+    line-height: var(--text-display--line-height);
+    letter-spacing: -0.025em;
+  }
+  h2 {
+    font-size: var(--text-h2);
+    line-height: var(--text-h2--line-height);
+  }
+  h3 {
+    font-size: var(--text-h3);
+    line-height: var(--text-h3--line-height);
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sage);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-sage-soft);
+    color: var(--color-ink);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  /* Sisukonteiner: max 1320 px, küljevahe clamp(20px, 5vw, 72px). */
+  .wrap {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 82.5rem;
+    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+  }
+
+  /* Hero foto ulatub desktopil parema servani (wrap'i parem sisemine serv -> vaateakna serv). */
+  @media (min-width: 64rem) {
+    .bleed-right {
+      margin-right: calc(-1 * ((100vw - min(100vw, 82.5rem)) / 2 + clamp(1.25rem, 5vw, 4.5rem)));
+    }
+  }
+
+  /* Sektsiooni vertikaalne vahe: 64–144 px. */
+  .section {
+    padding-block: clamp(4rem, 8vw, 9rem);
+  }
+
+  .lead {
+    font-size: var(--text-lead);
+    line-height: var(--text-lead--line-height);
+    color: var(--color-body);
+  }
+
+  .meta {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--color-muted);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3.125rem;
+    padding: 0 1.625rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.005em;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background-color 180ms var(--ease-out-soft),
+      color 180ms var(--ease-out-soft),
+      border-color 180ms var(--ease-out-soft);
+  }
+  .btn-primary {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--color-sage);
+    border-color: var(--color-sage);
+  }
+  .btn-secondary {
+    background: var(--color-surface);
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+  .btn-secondary:hover {
+    background: var(--color-surface-hover);
+  }
+  .btn-sage {
+    background: var(--color-sage);
+    border-color: var(--color-sage);
+    color: #fff;
+  }
+  .btn-sage:hover {
+    background: var(--color-sage-hover);
+    border-color: var(--color-sage-hover);
+  }
+  .btn-sm {
+    min-height: 2.75rem;
+    padding: 0 1.25rem;
+    font-size: 0.875rem;
+  }
+  .btn-block {
+    width: 100%;
+  }
+  /* Keelatud nupp: hall taust, tuhm tekst ja kursor, mitte ainult läbipaistvus. */
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    background: var(--color-line);
+    border-color: var(--color-line);
+    color: var(--color-muted);
+    cursor: not-allowed;
+  }
+
+  /* Tekstilink: õhuke alajoon, hoverdamisel tumeneb. */
+  .link {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-line-strong);
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+    transition:
+      color 160ms var(--ease-out-soft),
+      text-decoration-color 160ms var(--ease-out-soft);
+  }
+  .link:hover {
+    color: var(--color-sage);
+    text-decoration-color: currentColor;
+  }
+
+  /* Nool-link: „Vaata lähemalt →“, nool liigub hoverdamisel 4 px. */
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    color: var(--color-ink);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .arrow-link svg {
+    transition: transform 200ms var(--ease-out-soft);
+  }
+  .arrow-link:hover svg,
+  .group:hover .arrow-link svg {
+    transform: translateX(4px);
+  }
+
+  /* Vormiväljad: nähtav silt, kõrgus vähemalt 48 px, fookuses salvei piir ja rõngas. */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .field label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    min-height: 3rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-field-border);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 0.9rem;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--color-ink);
+    transition:
+      border-color 160ms var(--ease-out-soft),
+      box-shadow 160ms var(--ease-out-soft);
+  }
+  .field textarea {
+    min-height: 5rem;
+    resize: vertical;
+  }
+  .field input:hover,
+  .field select:hover,
+  .field textarea:hover {
+    border-color: var(--color-muted);
+  }
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible {
+    outline: none;
+    border-color: var(--color-sage);
+    box-shadow: 0 0 0 3px rgb(64 88 71 / 0.28);
+  }
+  .field [aria-invalid="true"] {
+    border-color: var(--color-error);
+  }
+  .field-error {
+    color: var(--color-error);
+    font-size: 0.875rem;
+  }
+  .field-hint {
+    color: var(--color-muted);
+    font-size: 0.875rem;
+  }
+
+  /* Valge pind hele joonega. */
+  .surface {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+  }
+
+  /* Lehe laadimise pehme sisenemine (hero). Ilma JS-ita ja reduced-motion korral nähtav. */
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .rise {
+    animation: rise 480ms var(--ease-out-soft) both;
+  }
+  .rise-2 {
+    animation-delay: 90ms;
+  }
+  .rise-3 {
+    animation-delay: 180ms;
+  }
+  .rise-4 {
+    animation-delay: 270ms;
+  }
+
+  /* Kerimisel ilmumine: JS lisab .reveal, nähtavaks saades .is-visible. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 360ms var(--ease-out-soft),
+      transform 360ms var(--ease-out-soft);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+    .rise {
+      animation: none;
+    }
+  }
+}
