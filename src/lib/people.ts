@@ -9,12 +9,12 @@ export type Person = {
   email: string;
   /** Kuvatakse ainult siis, kui number on teada, nt "+372 5xx xxxx". */
   phone: string | null;
-  /** Ruudukujuline foto kaustas public/inimesed, nt "/inimesed/kaire-kononen.webp". */
+  /** Ruudukujuline foto kaustas public/inimesed, nt "/inimesed/kaire-koronen.webp". */
   photo: string | null;
 };
 
 export const people: Person[] = [
-  { name: "Kaire Kononen", email: "kaire@pitic.eu", phone: null, photo: null },
+  { name: "Kaire Koronen", email: "kaire@pitic.eu", phone: null, photo: null },
   { name: "Katrin Pirn", email: "katrin@pitic.eu", phone: null, photo: null },
   { name: "Peeter Kõresaar", email: "peeter@pitic.eu", phone: null, photo: null },
 ];

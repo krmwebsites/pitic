@@ -27,83 +27,73 @@ const locationFacts = [
 /**
  * Kontakt: vasakul kontaktisikud (kaartidena) ja üldkontakt (2 × 2), paremal
  * „Meie asukoht“ kaardiga, Google Mapsi lingiga ja asukoha omadustega.
- * Mobiilis kõik üksteise all.
+ * Kompaktne, et desktopil ja sülearvutil mahuks kogu sisu esimesse vaatesse;
+ * mobiilis kõik üksteise all.
  */
 export default function ContactPage() {
   return (
-    <div className="wrap pt-10 pb-12 lg:pt-14 lg:pb-16">
-      <div className="max-w-3xl">
-        <p className="eyebrow">{content.navigation[3].label}</p>
-        <h1 className="mt-3">{content.contact.heading}</h1>
-        <p className="lead mt-4">{content.contact.body}</p>
-        <span className="pill pill-soft mt-5">
+    <div className="wrap pt-6 pb-8 lg:pt-7 lg:pb-6">
+      <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+        <div>
+          <p className="eyebrow">{content.navigation[3].label}</p>
+          <h1 className="mt-2 text-h2">{content.contact.heading}</h1>
+          <p className="lead mt-2">{content.contact.body}</p>
+        </div>
+        <span className="pill pill-soft mb-1">
           <span className="size-2 rounded-full bg-sage" aria-hidden="true" />
           Vastame tööpäeviti
         </span>
       </div>
 
-      <div className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1.85fr)_minmax(0,1fr)] lg:items-start lg:gap-6">
-        <div className="grid gap-5 lg:gap-6">
-          {/* Kontaktisikud */}
-          <section aria-labelledby="kontaktisikud" className="surface p-5 sm:p-6">
-            <h2 id="kontaktisikud" className="text-h3">
+      <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-start lg:gap-5">
+        <div className="grid gap-4 lg:gap-5">
+          {/* Kontaktisikud: nimi ja e-post tekstina (mitte lingina), e-post alati täies pikkuses. */}
+          <section aria-labelledby="kontaktisikud" className="surface p-4 sm:p-5">
+            <h2 id="kontaktisikud" className="text-[1.125rem] font-medium text-ink">
               Kontaktisikud
             </h2>
-            <ul className="mt-5 grid gap-3 md:grid-cols-3">
+            <ul className="mt-3 grid gap-2 md:grid-cols-3 md:gap-2.5">
               {people.map((person) => (
-                <li key={person.email} className="flex items-center gap-3 rounded-lg border border-line bg-surface p-3.5">
+                <li key={person.email} className="flex items-center gap-3 rounded-lg border border-line bg-surface p-2.5 md:p-3">
                   {person.photo ? (
                     <Image
                       src={person.photo}
                       alt={person.name}
-                      width={112}
-                      height={112}
-                      sizes="56px"
-                      className="size-12 shrink-0 rounded-full object-cover"
+                      width={96}
+                      height={96}
+                      sizes="44px"
+                      className="size-11 shrink-0 rounded-full object-cover"
                     />
                   ) : (
                     <span
-                      className="flex size-12 shrink-0 items-center justify-center rounded-full bg-sage-soft text-sm font-medium text-sage"
+                      className="flex size-11 shrink-0 items-center justify-center rounded-full bg-sage-soft text-xs font-medium text-sage"
                       aria-hidden="true"
                     >
                       {initials(person.name)}
                     </span>
                   )}
-                  <span className="min-w-0 flex-1">
+                  <span className="min-w-0">
                     <span className="block text-[0.9375rem] leading-tight font-medium text-ink">{person.name}</span>
-                    <a href={`mailto:${person.email}`} className="link mt-0.5 block truncate text-sm">
-                      {person.email}
-                    </a>
-                    {person.phone && (
-                      <a href={`tel:${person.phone.replace(/[^\d+]/g, "")}`} className="link block text-sm">
-                        {person.phone}
-                      </a>
-                    )}
+                    <span className="mt-0.5 block text-sm break-all text-body">{person.email}</span>
+                    {person.phone && <span className="block text-sm text-body">{person.phone}</span>}
                   </span>
-                  <a
-                    href={`mailto:${person.email}`}
-                    aria-label={`Kirjuta: ${person.name}`}
-                    className="hidden size-10 shrink-0 items-center justify-center rounded-md border border-line text-sage transition-colors hover:bg-sage-soft 2xl:flex"
-                  >
-                    <MailIcon size={18} />
-                  </a>
                 </li>
               ))}
             </ul>
           </section>
 
           {/* Üldkontakt */}
-          <section aria-labelledby="uldkontakt" className="surface p-5 sm:p-6">
-            <h2 id="uldkontakt" className="text-h3">
+          <section aria-labelledby="uldkontakt" className="surface p-4 sm:p-5">
+            <h2 id="uldkontakt" className="text-[1.125rem] font-medium text-ink">
               Üldkontakt
             </h2>
-            <ul className="mt-5 grid overflow-hidden rounded-lg border border-line sm:grid-cols-2">
+            <ul className="mt-3 grid overflow-hidden rounded-lg border border-line sm:grid-cols-2">
               {channels.map((channel, index) => {
                 const Icon = channel.icon;
                 const inner = (
                   <>
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sage-soft text-sage">
-                      <Icon size={18} />
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sage-soft text-sage">
+                      <Icon size={17} />
                     </span>
                     <span className="min-w-0 truncate text-[0.9375rem] text-ink">{channel.label}</span>
                   </>
@@ -111,7 +101,7 @@ export default function ContactPage() {
                 return (
                   <li
                     key={channel.label}
-                    className={`flex items-center gap-3 px-4 py-3.5 ${index > 0 ? "border-t border-line" : ""} ${
+                    className={`flex items-center gap-3 px-3.5 py-2 md:py-2.5 ${index > 0 ? "border-t border-line" : ""} ${
                       index >= 2 ? "sm:border-t" : "sm:border-t-0"
                     } ${index % 2 === 1 ? "sm:border-l sm:border-line" : ""}`}
                   >
@@ -134,11 +124,11 @@ export default function ContactPage() {
         </div>
 
         {/* Meie asukoht */}
-        <section aria-labelledby="asukoht" className="surface p-5 sm:p-6">
-          <h2 id="asukoht" className="text-h3">
+        <section aria-labelledby="asukoht" className="surface flex flex-col p-4 sm:p-5 lg:h-[clamp(19rem,calc(100svh-18rem),34rem)]">
+          <h2 id="asukoht" className="text-[1.125rem] font-medium text-ink">
             Meie asukoht
           </h2>
-          <div className="relative mt-5 aspect-[4/3] overflow-hidden rounded-lg border border-line bg-surface-hover">
+          <div className="relative mt-3 aspect-[16/9] overflow-hidden rounded-lg border border-line bg-surface-hover lg:aspect-auto lg:min-h-[9rem] lg:flex-1">
             <iframe
               src={site.maps.embed}
               title={`Pitici asukoht kaardil: ${site.address.full}`}
@@ -152,21 +142,21 @@ export default function ContactPage() {
             href={site.maps.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-secondary btn-block mt-4 justify-between"
+            className="btn btn-secondary btn-sm btn-block mt-3 justify-between"
           >
             <span className="flex-1 text-center">Ava Google Mapsis</span>
-            <ExternalLinkIcon size={18} />
+            <ExternalLinkIcon size={17} />
           </a>
-          <ul className="mt-5 grid grid-cols-2 border-t border-line pt-5">
+          <ul className="mt-3 grid grid-cols-2 border-t border-line pt-3">
             {locationFacts.map((fact, index) => {
               const Icon = fact.icon;
               return (
                 <li
                   key={fact.label}
-                  className={`flex items-center gap-3 text-[0.9375rem] text-ink ${index > 0 ? "border-l border-line pl-4" : "pr-4"}`}
+                  className={`flex items-center gap-2.5 text-sm text-ink ${index > 0 ? "border-l border-line pl-3" : "pr-3"}`}
                 >
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-sage/40 text-sage">
-                    <Icon size={18} />
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-sage/40 text-sage">
+                    <Icon size={17} />
                   </span>
                   {fact.label}
                 </li>
