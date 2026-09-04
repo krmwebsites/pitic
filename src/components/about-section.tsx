@@ -25,16 +25,17 @@ export function AboutSection() {
             <h2 id="meist-pealkiri" className="mt-3">
               {content.about.heading}
             </h2>
-            <div className="mt-4 grid max-w-[58ch] gap-4">
+            {/* Kolm lõiku ühes ühtlases suuruses; esimene lõik veidi tumedam kui juhtlõik. */}
+            <div className="mt-5 grid max-w-[54ch] gap-4 text-[1.0625rem] leading-[1.65] text-body">
               {content.about.paragraphs.map((paragraph, index) => (
-                <p key={index} className={index === 0 ? "lead" : "text-[0.9375rem]"}>
+                <p key={index} className={index === 0 ? "text-ink" : ""}>
                   {paragraph}
                 </p>
               ))}
             </div>
 
             {/* Kutse: eristuv, must ja paks; all kontakti nupp. */}
-            <p className="mt-9 max-w-[20ch] text-[clamp(1.625rem,1.1rem+1.6vw,2.25rem)] leading-[1.15] font-semibold tracking-[-0.01em] text-ink text-balance">
+            <p className="mt-8 max-w-[20ch] text-[clamp(1.5rem,1rem+1.4vw,2rem)] leading-[1.15] font-semibold tracking-[-0.01em] text-ink text-balance">
               Soovid lähemalt tutvuda?
             </p>
             <Link href="/kontakt" className="btn btn-primary mt-6">
