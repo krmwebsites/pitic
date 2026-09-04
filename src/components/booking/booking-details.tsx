@@ -79,7 +79,8 @@ export function StepIndicator({ steps, current }: { steps: readonly string[]; cu
               >
                 {state === "done" ? <CheckCircleIcon size={16} /> : `${number}.`}
               </span>
-              <span className={`text-sm ${state === "current" ? "font-medium text-ink" : "text-muted"}`}>
+              {/* Kitsal ekraanil on nähtav ainult aktiivse sammu nimi, numbrid jäävad. */}
+              <span className={`text-sm ${state === "current" ? "font-medium text-ink" : "hidden text-muted sm:inline"}`}>
                 <span className="sr-only">Samm {number}: </span>
                 {label}
               </span>

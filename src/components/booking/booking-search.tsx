@@ -394,6 +394,23 @@ export function BookingSearch({ rooms, config }: { rooms: Room[]; config: Bookin
         </div>
       )}
 
+      {/* Mobiilis: valitud ruumi järel kleepuv riba, et „Jätka“ oleks käeulatuses. */}
+      {step === 2 && chosen && searched && (
+        <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface/95 p-3 backdrop-blur-md lg:hidden">
+          <div className="wrap flex items-center justify-between gap-4">
+            <p className="min-w-0 text-sm">
+              <span className="block truncate font-medium text-ink">{chosen.room.name}</span>
+              <span className="meta block truncate">
+                {formatDate(searched.date, false)} · {searched.time}–{endTime}
+              </span>
+            </p>
+            <button type="button" onClick={() => setStep(3)} className="btn btn-sage btn-sm shrink-0">
+              Jätka
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Samm 3: andmed */}
       {step === 3 && chosen && searched && (
         <div className="surface mx-auto mt-8 max-w-3xl p-5 sm:p-7">
