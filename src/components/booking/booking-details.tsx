@@ -65,7 +65,12 @@ export function StepIndicator({ steps, current }: { steps: readonly string[]; cu
         const number = index + 1;
         const state = number === current ? "current" : number < current ? "done" : "todo";
         return (
-          <li key={label} className="flex min-w-0 flex-1 items-center gap-2 last:flex-none">
+          <li
+            key={label}
+            className={`flex items-center gap-2 last:flex-none ${
+              state === "current" ? "flex-none sm:min-w-0 sm:flex-1" : "min-w-0 flex-1"
+            }`}
+          >
             <span aria-current={state === "current" ? "step" : undefined} className="flex shrink-0 items-center gap-2">
               <span
                 className={`flex size-8 items-center justify-center rounded-full border text-sm font-medium ${
