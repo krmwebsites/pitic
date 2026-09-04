@@ -30,7 +30,7 @@ function gallery(slug: string, items: (string | [alt: string, height: number])[]
 
 export const photos = {
   /** Avalehe hero: hoone tänava poolt. */
-  hero: photo("hero-maja", "Keskväljak 15 hoone Keilas", 1440, 958),
+  hero: photo("hero-maja", "Keskväljak 15 hoone Keilas", 1150, 958),
   /** „Meist“: hoone hoovi poolt (püstine). */
   house: photo("maja-hoov", "Keskväljak 15 hoone hoovi poolt", 798, 1060),
 } as const satisfies Record<string, Photo>;
