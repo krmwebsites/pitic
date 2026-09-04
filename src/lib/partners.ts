@@ -1,60 +1,68 @@
 /**
- * Koostööpartnerid, kes rendivad Keskväljak 15 majas ruume. Nimekiri on
- * tellijalt; tutvustused on lühikesed ja ainult avalikult kontrollitud
- * faktide põhjal. Kus tutvustust ei õnnestunud kontrollida, on see
- * `null` ja lehel kuvatakse ainult nimi. Logo lisamiseks pane fail kausta
- * public/partnerid ja anna `logo` väärtuseks tee (nt "/partnerid/late.svg").
+ * Koostööpartnerid, kes rendivad Keskväljak 15 majas ruume (tellija
+ * nimekiri ja tutvustused). Logo lisamiseks pane fail kausta
+ * public/partnerid ja anna `logo` väärtuseks tee (nt "/partnerid/late.svg");
+ * seni kuvatakse monogramm.
  */
 
 export type Partner = {
   name: string;
-  /** Lühitutvustus või null, kui see on veel täpsustamisel. */
-  description: string | null;
+  /** Tegevusala silt kaardi ülaservas (suurtähtedega). */
+  category: string;
+  description: string;
   /** Logo fail (public/ all) või null, siis kuvatakse monogramm. */
   logo: string | null;
-  /** Avalik veebileht, kui on. */
-  url: string | null;
+  /** Monogrammi käsitsi määratud tähed (vaikimisi nime algustähed). */
+  mark?: string;
+  /** Link kaardi all: väline veebileht või lehe enda link. */
+  link: { label: string; href: string; external: boolean } | null;
 };
 
 export const partners: Partner[] = [
   {
     name: "Nokitsejad",
+    category: "Töökoda",
     description: "Parandustöökoda ja puutööring, kus huvilised saavad ise meisterdada ja parandada.",
     logo: null,
-    url: null,
+    link: null,
   },
   {
     name: "Keila Teraapiakeskus",
-    description:
-      "Teraapia- ja rehabilitatsiooniteenused Lääne-Harjumaa peredele, muu hulgas logopeedia, psühholoogia ja füsioteraapia.",
+    category: "Teraapia",
+    description: "Teraapia- ja rehabilitatsiooniteenused Lääne-Harjumaa peredele.",
     logo: null,
-    url: "https://teraapiamaja.ee/",
+    link: { label: "Veebileht", href: "https://teraapiamaja.ee/", external: true },
   },
   {
-    name: "Minusinuilu OÜ",
-    description: null,
+    name: "Minusinu ilu OÜ",
+    category: "Ilu & heaolu",
+    description: "Ilu- ja heaoluteenused.",
     logo: null,
-    url: null,
+    link: null,
   },
   {
     name: "Loovtee OÜ",
-    description: null,
+    category: "Loovtegevus",
+    description: "Loovust ja arengut toetavad tegevused.",
     logo: null,
-    url: null,
+    link: null,
   },
   {
     name: "Läte kool",
-    description: "Waldorfkool Läte on lapsevanemate loodud erakool, mille klassid tegutsevad Keskväljak 15 majas.",
+    category: "Haridus",
+    description: "Waldorfkool, mille klassid tegutsevad Keskväljak 15 majas.",
     logo: null,
-    url: "https://late.ee/",
+    link: { label: "Veebileht", href: "https://late.ee/", external: true },
+  },
+  {
+    name: "Rave Sport OÜ",
+    category: "Sport",
+    mark: "R",
+    description: "Jõusaali ruumide rent ja treeninguvõimalused.",
+    logo: null,
+    link: { label: "Vaata jõusaali", href: "/ruumide-rent/jousaal", external: false },
   },
 ];
-
-/** Jõusaali ruumi rendiga tegeleb majas Rave Sport OÜ (kuvatakse ainult partnerite juures). */
-export const gymOperator = {
-  name: "Rave Sport OÜ",
-  description: "Tegeleb majas jõusaali ruumi rendiga.",
-};
 
 /** Monogramm logo asemel: kuni kaks algustähte. */
 export function monogram(name: string) {
