@@ -5,7 +5,6 @@ import { site } from "@/lib/site";
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     "/",
-    "/ruumide-rent",
     ...rooms.map((room) => roomHref(room.slug)),
     "/broneerimine",
     "/kontakt",

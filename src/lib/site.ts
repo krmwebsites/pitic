@@ -36,7 +36,7 @@ export const site = {
  */
 export const nav = [
   { label: content.navigation[0].label, href: "/" },
-  { label: content.navigation[1].label, href: "/ruumide-rent" },
+  { label: content.navigation[1].label, href: "/#ruumid" },
   { label: content.navigation[3].label, href: "/kontakt" },
 ] as const;
 /* „Broneerimine“ ei ole menüüs, sest päises on juba CTA „Broneeri ruum“ (/broneerimine). */

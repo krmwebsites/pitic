@@ -57,7 +57,7 @@ export default async function RoomPage({ params }: RoomPageProps) {
       <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
         {/* Vasak veerg: foto, nimi, faktid, omadused, teised ruumid */}
         <div className="py-8 lg:border-r lg:border-line lg:py-12 lg:pr-12 xl:pr-16">
-          <Link href="/ruumide-rent" className="arrow-link text-sm">
+          <Link href="/#ruumid" className="arrow-link text-sm">
             <ArrowLeftIcon />
             {content.navigation[1].label}
           </Link>

@@ -63,7 +63,7 @@ export default function HomePage() {
             <p className="lead rise rise-2 mt-5 max-w-[34ch]">{content.hero.body}</p>
 
             <div className="rise rise-3 mt-7 flex flex-col gap-3 sm:flex-row">
-              <Link href="/ruumide-rent" className="btn btn-sage">
+              <Link href="/#ruumid" className="btn btn-sage">
                 {content.hero.primaryCta}
               </Link>
               <Link href="/broneerimine" className="btn btn-sage-outline">
@@ -91,27 +91,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Meie ruumid: kolm kaarti, iga kaart viib ruumi lehele. */}
-      <Reveal as="section" className="wrap section">
-        <div className="flex items-center justify-between gap-4">
-          <p className="eyebrow">Meie ruumid</p>
-          <span className="pill pill-outline">{rooms.length} ruumi</span>
-        </div>
-        <div className="max-w-2xl">
-          <h2 className="mt-3">{content.spacesSection.heading}</h2>
-          <p className="lead mt-3">{content.spacesSection.body}</p>
-        </div>
-        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          {rooms.map((room) => (
-            <li key={room.slug}>
-              <RoomCard room={room} compact />
-            </li>
-          ))}
-        </ul>
-        <p className="sr-only">
-          {site.address.full}, {site.hours.label}
-        </p>
-      </Reveal>
+      {/*
+        Ruumid (layout-artifacti vaade 02 avalehe osana): menüü „Ruumid“ kerib siia.
+        Kolm kaarti: pilt → nimi ja mahutavus → kirjeldus → Broneeri ruum / Vaata lähemalt.
+      */}
+      <section aria-labelledby="ruumid-pealkiri" className="wrap section">
+        {/* Ankur on pealkirja juures, et menüü „Ruumid“ maanduks otse pealkirjale, mitte sektsiooni ülavahesse. */}
+        <Reveal>
+          <div id="ruumid" className="max-w-2xl scroll-mt-4">
+            <h2 id="ruumid-pealkiri">{content.spacesSection.heading}</h2>
+            <p className="lead mt-4">
+              {content.spacesSection.body} Kõik ruumid asuvad aadressil {site.address.full} ja on broneeritavad{" "}
+              {site.hours.label}.
+            </p>
+          </div>
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-6">
+            {rooms.map((room) => (
+              <li key={room.slug}>
+                <RoomCard room={room} variant="booking" />
+              </li>
+            ))}
+          </ul>
+          <p className="mt-10 border-t border-line pt-6">
+            Ei ole kindel, milline ruum sobib?{" "}
+            <Link href="/kontakt" className="link">
+              Võta ühendust
+            </Link>
+            , aitame valida.
+          </p>
+        </Reveal>
+      </section>
     </>
   );
 }

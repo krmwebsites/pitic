@@ -13,7 +13,7 @@ export default function NotFound() {
         <Link href="/" className="btn btn-primary">
           {content.navigation[0].label}
         </Link>
-        <Link href="/ruumide-rent" className="btn btn-secondary">
+        <Link href="/#ruumid" className="btn btn-secondary">
           {content.hero.primaryCta}
         </Link>
       </div>
