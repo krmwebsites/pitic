@@ -20,12 +20,12 @@ export default function HomePage() {
     <>
       {/* Hero: tekst vasakul (u 40 %), foto paremal (u 60 %), mobiilis tekst enne fotot. */}
       <section aria-labelledby="hero-pealkiri" className="wrap">
-        <div className="grid items-center gap-10 py-10 lg:min-h-[37.5rem] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16 lg:py-0">
-          <div className="lg:py-16">
+        <div className="grid items-center gap-8 py-8 lg:min-h-0 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16 lg:py-0">
+          <div className="lg:py-10">
             {/* React Bits „Blur Text“: sõnad ilmuvad hägust, üks tagasihoidlik stagger. */}
             <BlurText as="h1" id="hero-pealkiri" text={content.hero.heading} className="max-w-[6.9em] text-[clamp(2.625rem,1.4rem+3.4vw,4.25rem)] text-wrap" />
-            <p className="lead rise rise-2 mt-6 max-w-[34ch]">{content.hero.body}</p>
-            <div className="rise rise-3 mt-9 flex flex-col gap-3 sm:flex-row">
+            <p className="lead rise rise-2 mt-5 max-w-[34ch]">{content.hero.body}</p>
+            <div className="rise rise-3 mt-7 flex flex-col gap-3 sm:flex-row">
               <Link href="/ruumide-rent" className="btn btn-primary">
                 {content.hero.primaryCta}
               </Link>
@@ -38,7 +38,7 @@ export default function HomePage() {
             photo={photos.hero}
             priority
             sizes="(min-width: 1024px) 60vw, 100vw"
-            className="rise rise-4 bleed-right aspect-[4/3] rounded-md lg:aspect-auto lg:h-full lg:min-h-[34rem] lg:rounded-none"
+            className="rise rise-4 bleed-right aspect-[4/3] rounded-md lg:aspect-auto lg:h-[27rem] lg:rounded-none"
           />
         </div>
       </section>
@@ -49,13 +49,13 @@ export default function HomePage() {
           {content.highlights.map((item, index) => {
             const Icon = highlightIcons[index];
             return (
-              <li key={item.title} className="flex items-center gap-4 py-5 md:px-6 md:first:pl-0 md:last:pr-0">
+              <li key={item.title} className="flex items-center gap-3.5 py-3.5 md:px-6 md:first:pl-0 md:last:pr-0">
                 <span className="text-sage">
                   <Icon />
                 </span>
                 <span>
                   <span className="block text-[0.9375rem] font-medium text-ink">{item.title}</span>
-                  <span className="meta block">{item.body}</span>
+                  <span className="meta block text-[0.8125rem]">{item.body}</span>
                 </span>
               </li>
             );
@@ -64,15 +64,15 @@ export default function HomePage() {
       </section>
 
       {/* Kolm ruumi ühel real; iga kaart viib ruumi lehele. */}
-      <Reveal as="section" className="wrap section">
+      <Reveal as="section" className="wrap py-10 lg:py-12">
         <div className="max-w-2xl">
           <h2>{content.spacesSection.heading}</h2>
           <p className="lead mt-3">{content.spacesSection.body}</p>
         </div>
-        <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <ul className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {rooms.map((room) => (
             <li key={room.slug}>
-              <RoomCard room={room} />
+              <RoomCard room={room} compact />
             </li>
           ))}
         </ul>
