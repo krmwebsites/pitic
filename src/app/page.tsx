@@ -40,7 +40,7 @@ export default function HomePage() {
             photo={photos.hero}
             priority
             sizes="(min-width: 1024px) 54vw, 100vw"
-            className="rise rise-4 aspect-[1427/1102] w-full flex-none lg:order-2 lg:w-[54%]"
+            className="rise rise-4 aspect-[1222/1056] w-full flex-none lg:order-2 lg:w-[54%]"
           />
 
           <div className="relative z-10 mx-3 -mt-20 mb-3 shrink-0 rounded-lg bg-surface p-4 shadow-soft sm:mx-6 sm:-mt-24 sm:mb-4 sm:p-8 lg:order-1 lg:m-0 lg:flex lg:w-[46%] lg:flex-col lg:justify-center lg:rounded-none lg:px-9 lg:py-8 lg:shadow-none xl:px-11">
