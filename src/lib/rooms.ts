@@ -54,7 +54,7 @@ const extras: Record<string, Extra> = {
     capacity: 50,
     tagline: "Seminarideks ja sündmusteks.",
     description:
-      "Suursaal mahutab kuni 50 inimest ning sobib seminarideks, esitlusteks ja sündmusteks. Paigutuse lepime kokku vastavalt üritusele.",
+      "Suur saal mahutab kuni 50 inimest ning sobib seminarideks, esitlusteks ja sündmusteks. Paigutuse lepime kokku vastavalt üritusele.",
     suitedFor: ["Seminarid ja koolitused", "Esitlused ja infopäevad", "Sündmused kuni 50 inimesele"],
     photo: galleries.suursaal[0],
     gallery: [...galleries.suursaal],

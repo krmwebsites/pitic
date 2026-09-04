@@ -52,10 +52,10 @@ export const galleries = {
     "Nõupidamiste ruum: vaade ukse poolt",
   ]),
   suursaal: gallery("suursaal", [
-    "Suursaal: toolide read lava ees, suured aknad",
-    "Suursaal: toolide read külgvaates",
-    "Suursaal: toolide read vaadatuna saali tagant",
-    "Suursaal: toolide read paremalt küljelt",
-    "Suursaal: laudade paigutus ürituseks",
+    "Suur saal: toolide read lava ees, suured aknad",
+    "Suur saal: toolide read külgvaates",
+    "Suur saal: toolide read vaadatuna saali tagant",
+    "Suur saal: toolide read paremalt küljelt",
+    "Suur saal: laudade paigutus ürituseks",
   ]),
 } satisfies Record<string, Photo[]>;

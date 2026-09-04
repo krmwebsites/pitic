@@ -33,7 +33,7 @@ laupäev ja pühapäev suletud. Erandpäevad (pühad, remont) lisa samas
 | ----------------- | --------- | ------------------ |
 | Jõusaal           | kuni 8    | 60 min             |
 | Nõupidamiste ruum | kuni 12   | 60 min             |
-| Suursaal          | kuni 50   | 60 min             |
+| Suur saal         | kuni 50   | 60 min             |
 
 Igal teenusel:
 
@@ -51,7 +51,7 @@ Kirjuta ID-d üles sammu 9 jaoks.
 ## 4. Teenusepakkujad = ruumid füüsiliste ressurssidena
 
 **Manage → Service providers**. Loo iga ruumi kohta oma teenusepakkuja
-(Jõusaal, Nõupidamiste ruum, Suursaal) ja seo iga teenus ainult oma ruumi
+(Jõusaal, Nõupidamiste ruum, Suur saal) ja seo iga teenus ainult oma ruumi
 teenusepakkujaga. Ühel teenusepakkujal saab olla ühes ajavahemikus vaid üks
 broneering, seega ei ole võimalik sama ruumi topelt broneerida, kolme erinevat
 ruumi saab aga sama ajal broneerida.
@@ -65,7 +65,7 @@ Kui te ei soovi kliendile teenusepakkuja valikut näidata, lülita
 Lülita sisse **Custom Features → Related Resources** ja ava **Manage → Related resources**.
 
 1. Loo iga ruumi kohta ressursigrupp: „Jõusaal (ruum)”, „Nõupidamiste ruum (ruum)”,
-   „Suursaal (ruum)”.
+   „Suur saal (ruum)”.
 2. Tüüp: **One per booking** (iga broneering vajab tervet ruumi), kogus **1**.
 3. Seo iga ressursigrupp oma teenusega (samm 3). Alles pärast sidumist mõjutab
    ressurss saadavust.
@@ -78,7 +78,7 @@ teenusepakkujaid.
 
 - **Custom Features → Intake forms**: lisa väljad
   - „Osalejate arv” (number, kohustuslik; lisa juhis, et Jõusaal kuni 8,
-    Nõupidamiste ruum kuni 12, Suursaal kuni 50),
+    Nõupidamiste ruum kuni 12, Suur saal kuni 50),
   - „Sõnum või erisoov” (tekst, valikuline).
 - Kliendi nimi, e-post ja telefon on vaikimisi kohustuslikud:
   **Settings → Booking website settings → Client fields** (telefon: required).

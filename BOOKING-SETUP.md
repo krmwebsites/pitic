@@ -57,7 +57,7 @@ Täielik juhend: [docs/simplybook-seadistus.md](docs/simplybook-seadistus.md). L
 
 - *Settings → General*: ajavöönd Europe/Tallinn, keel eesti;
 - *Settings → Working hours*: esmaspäevast reedeni 09:00–17:00;
-- *Manage → Services*: Jõusaal, Nõupidamiste ruum, Suursaal; kestus, etteteatamise aeg,
+- *Manage → Services*: Jõusaal, Nõupidamiste ruum, Suur saal; kestus, etteteatamise aeg,
   puhveraeg ja tühistamisreeglid teenuse seadetes;
 - *Manage → Providers*: üks pakkuja ruumi kohta, seotud õige teenusega;
 - kinnitus- ja meeldetuletuskirjad eesti keeles; soovi korral admini kinnitus

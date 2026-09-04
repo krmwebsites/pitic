@@ -52,7 +52,7 @@
     },
     {
       "id": "main-hall",
-      "name": "Suursaal",
+      "name": "Suur saal",
       "capacity": "Kuni 50 inimest",
       "image": "room-hall.webp"
     }
@@ -77,7 +77,7 @@
   },
   "seo": {
     "title": "Pitic | Ruumide rent Keila keskväljakul",
-    "description": "Broneeri Piticu jõusaal, nõupidamiste ruum või suursaal mugavalt Keila keskväljakul."
+    "description": "Broneeri Piticu jõusaal, nõupidamiste ruum või suur saal mugavalt Keila keskväljakul."
   }
 }
 

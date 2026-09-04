@@ -4,7 +4,6 @@ import { roomHref, type Room } from "@/lib/rooms";
 import { ArrowRightIcon } from "./icons";
 import { Photo } from "./photo";
 import { CountUp } from "./reactbits/count-up";
-import { SpotlightCard } from "./reactbits/spotlight-card";
 
 type Props = {
   room: Room;
@@ -41,7 +40,7 @@ export function RoomCard({ room, variant = "link", priority, compact = false }: 
 
   if (variant === "booking") {
     return (
-      <SpotlightCard className="surface group h-full rounded-lg transition-colors hover:border-line-strong">
+      <div className="surface group h-full rounded-lg transition-colors hover:border-line-strong">
         <article className="flex h-full flex-col">
           <Link href={href} className="block" aria-label={`${room.name}: ${content.spacesSection.linkLabel}`}>
             {photo}
@@ -67,12 +66,12 @@ export function RoomCard({ room, variant = "link", priority, compact = false }: 
             </div>
           </div>
         </article>
-      </SpotlightCard>
+      </div>
     );
   }
 
   return (
-    <SpotlightCard className="surface group h-full rounded-lg transition-colors hover:border-line-strong focus-within:border-line-strong">
+    <div className="surface group h-full rounded-lg transition-colors hover:border-line-strong focus-within:border-line-strong">
       <Link href={href} className="flex h-full flex-col">
         {photo}
         <span className="flex flex-1 flex-col p-6">
@@ -87,6 +86,6 @@ export function RoomCard({ room, variant = "link", priority, compact = false }: 
           </span>
         </span>
       </Link>
-    </SpotlightCard>
+    </div>
   );
 }
