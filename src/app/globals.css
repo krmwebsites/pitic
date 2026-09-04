@@ -35,7 +35,9 @@
   --text-display--line-height: 1.02;
 
   --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
 
   --shadow-soft: 0 18px 50px rgb(18 20 18 / 0.07);
 
@@ -148,6 +150,40 @@
     color: var(--color-muted);
   }
 
+  /* Väike salvei silt pealkirja kohal: „MEIE RUUMID“, „KEILA KESKVÄLJAKUL“. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-sage);
+  }
+
+  /* Ümar silt: mahutavus, ruumide arv, olek. */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.375rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .pill-soft {
+    background: var(--color-sage-soft);
+    color: var(--color-sage);
+  }
+  .pill-outline {
+    border: 1px solid var(--color-line-strong);
+    color: var(--color-body);
+    background: var(--color-surface);
+  }
+
   .btn {
     display: inline-flex;
     align-items: center;
@@ -194,6 +230,14 @@
   .btn-sage:hover {
     background: var(--color-sage-hover);
     border-color: var(--color-sage-hover);
+  }
+  .btn-sage-outline {
+    background: transparent;
+    border-color: var(--color-sage);
+    color: var(--color-sage);
+  }
+  .btn-sage-outline:hover {
+    background: var(--color-sage-soft);
   }
   .btn-sm {
     min-height: 2.75rem;

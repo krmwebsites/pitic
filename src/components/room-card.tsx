@@ -14,48 +14,50 @@ type Props = {
    */
   variant?: "link" | "booking";
   priority?: boolean;
+  /** Avalehe kompaktne kaart: lai foto ja ühelauseline kirjeldus. */
+  compact?: boolean;
 };
 
-/** Mahutavus: „Kuni 8 inimest“, number loetakse vaatevälja jõudes üles (React Bits Count Up). */
-function Capacity({ room }: { room: Room }) {
+/** Mahutavuse silt: „Kuni 8 inimest“, number loetakse vaatevälja jõudes üles (React Bits Count Up). */
+function CapacityPill({ room }: { room: Room }) {
   return (
-    <>
-      Kuni <CountUp to={room.capacity} /> inimest
-    </>
+    <span className="pill pill-soft shrink-0 gap-0">
+      Kuni&nbsp;<CountUp to={room.capacity} />&nbsp;inimest
+    </span>
   );
 }
 
-export function RoomCard({ room, variant = "link", priority }: Props) {
+export function RoomCard({ room, variant = "link", priority, compact = false }: Props) {
   const href = roomHref(room.slug);
   const photo = (
     <Photo
       photo={room.photo}
       priority={priority}
       sizes="(min-width: 1024px) 420px, (min-width: 640px) 50vw, 100vw"
-      className="aspect-[4/3] border-b border-line"
+      className={compact ? "aspect-[16/10]" : "aspect-[4/3]"}
       imgClassName="transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.03]"
     />
   );
 
   if (variant === "booking") {
     return (
-      <SpotlightCard className="surface group h-full transition-colors hover:border-line-strong">
+      <SpotlightCard className="surface group h-full rounded-lg transition-colors hover:border-line-strong">
         <article className="flex h-full flex-col">
           <Link href={href} className="block" aria-label={`${room.name}: ${content.spacesSection.linkLabel}`}>
             {photo}
           </Link>
           <div className="flex flex-1 flex-col p-6">
-            <h2 className="text-h3">
-              <Link href={href} className="transition-colors hover:text-sage">
-                {room.name}
-              </Link>
-            </h2>
-            <p className="meta mt-1">
-              <Capacity room={room} />
-            </p>
-            <p className="mt-4 text-[0.9375rem]">{room.description}</p>
-            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 pt-2">
-              <Link href={`${href}#broneeri`} className="btn btn-primary btn-sm">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-h3">
+                <Link href={href} className="transition-colors hover:text-sage">
+                  {room.name}
+                </Link>
+              </h2>
+              <CapacityPill room={room} />
+            </div>
+            <p className="mt-3 text-[0.9375rem]">{room.description}</p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-line pt-5">
+              <Link href={`${href}#broneeri`} className="btn btn-sage btn-sm">
                 {content.hero.secondaryCta}
               </Link>
               <Link href={href} className="arrow-link">
@@ -70,15 +72,16 @@ export function RoomCard({ room, variant = "link", priority }: Props) {
   }
 
   return (
-    <SpotlightCard className="surface group h-full transition-colors hover:border-line-strong focus-within:border-line-strong">
+    <SpotlightCard className="surface group h-full rounded-lg transition-colors hover:border-line-strong focus-within:border-line-strong">
       <Link href={href} className="flex h-full flex-col">
         {photo}
         <span className="flex flex-1 flex-col p-6">
-          <span className="text-h3 font-medium text-ink">{room.name}</span>
-          <span className="meta mt-1">
-            <Capacity room={room} />
+          <span className="flex items-start justify-between gap-3">
+            <span className="min-w-0 text-[1.375rem] leading-tight font-medium text-ink">{room.name}</span>
+            <CapacityPill room={room} />
           </span>
-          <span className="arrow-link mt-6 justify-between border-t border-line pt-5">
+          <span className="mt-2 text-[0.9375rem] text-body">{room.tagline}</span>
+          <span className="arrow-link mt-5 justify-between border-t border-line pt-4">
             {content.spacesSection.linkLabel}
             <ArrowRightIcon />
           </span>

@@ -112,6 +112,14 @@ export function CheckCircleIcon(props: IconProps) {
   );
 }
 
+export function DumbbellIcon(props: IconProps) {
+  return (
+    <Base size={18} {...props}>
+      <path d="M7 8v8M17 8v8M4.5 9.5v5M19.5 9.5v5M7 12h10M2.5 12h2M19.5 12h2" />
+    </Base>
+  );
+}
+
 export function TagIcon(props: IconProps) {
   return (
     <Base size={18} {...props}>
