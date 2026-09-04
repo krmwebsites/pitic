@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookingFlow } from "@/components/booking/booking-flow";
 import { ArrowLeftIcon, ArrowRightIcon, UsersIcon } from "@/components/icons";
+import { EquipmentList, RoomFeatureList, SuitedForList } from "@/components/room-features";
 import { RoomGallery } from "@/components/room-gallery";
 import { getBookingConfig } from "@/lib/booking";
 import { content } from "@/lib/content";
@@ -67,6 +68,11 @@ export default async function RoomPage({ params }: RoomPageProps) {
           </div>
 
           <p className="mt-2 max-w-prose text-[0.9375rem]">{room.description}</p>
+
+          <RoomFeatureList room={room} className="mt-4" />
+          <p className="mt-4 text-[0.9375rem] font-medium text-ink">Sobib</p>
+          <SuitedForList room={room} className="mt-1.5 sm:grid-cols-2" />
+          <EquipmentList room={room} className="mt-4" />
 
           <a href="#broneeri" className="btn btn-sage btn-block mt-6 lg:hidden">
             {content.hero.secondaryCta}

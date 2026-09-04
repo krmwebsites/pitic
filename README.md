@@ -37,14 +37,16 @@ npx tsc --noEmit && npm run lint && npm run build
 
 ## Fotod
 
-Kaustas `public/fotod` on ruumide galeriid: `jousaal-1..5.webp`, `noupidamiste-ruum-1..5.webp`,
-`suursaal-1..5.webp` (1536 × 1024, esimene on ruumi põhifoto kaartidel). Uue foto lisamiseks pane
-fail kausta ja lisa alt-tekst vastavasse massiivi failis `src/lib/photos.ts`; fotode arv on vaba.
+Kaustas `public/fotod` on Keskväljak 15 päris fotod:
 
-Avalehe hero-pilt `hero-space.webp` on veel **näidisfoto** (silt „Näidisfoto“). Enne avaldamist:
+- ruumide galeriid `jousaal-1..13.webp`, `noupidamiste-ruum-1..11.webp`, `suursaal-1..6.webp`
+  (kuni 1600 px lai, järjestus üldvaadetest detailideni; esimene on ruumi põhifoto kaartidel);
+- `hero-maja.webp` (avalehe hero, hoone tänava poolt) ja `maja-hoov.webp` („Meist“ sektsioon).
 
-1. asenda see päris fotoga ja pane `src/lib/photos.ts`-is `placeholder: false`;
-2. loo Open Graphi pilt päris fotoga (`src/app/opengraph-image.png`, 1200 × 630).
+Uue foto lisamiseks pane fail kausta ja lisa alt-tekst vastavasse massiivi failis `src/lib/photos.ts`;
+fotode arv on vaba. Koostööpartnerite logod: pane fail kausta `public/partnerid` ja anna
+`src/lib/partners.ts`-is `logo` väärtuseks selle tee. Open Graphi pilt (`src/app/opengraph-image.png`,
+1200 × 630) tasub teha päris fotoga.
 
 ## Broneerimine
 

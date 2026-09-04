@@ -98,9 +98,9 @@ export function RoomGallery({ photos, roomName, className = "" }: Props) {
       </div>
 
       {count > 1 && (
-        <ul className="mt-3 flex gap-3" aria-label={`${roomName}: fotod`}>
+        <ul className="-mx-1 mt-3 flex gap-2.5 overflow-x-auto px-1 pb-1" aria-label={`${roomName}: fotod`}>
           {photos.map((item, i) => (
-            <li key={item.src} className="min-w-0 flex-1">
+            <li key={item.src} className="w-[5.5rem] shrink-0 sm:w-24">
               <button
                 type="button"
                 onClick={() => setIndex(i)}
@@ -110,7 +110,7 @@ export function RoomGallery({ photos, roomName, className = "" }: Props) {
                   i === index ? "border-sage ring-1 ring-sage" : "border-line hover:border-line-strong"
                 }`}
               >
-                <Image src={item.src} alt="" width={item.width} height={item.height} sizes="200px" className="h-16 w-full object-cover sm:h-20 lg:h-[5.5rem]" />
+                <Image src={item.src} alt="" width={item.width} height={item.height} sizes="200px" className="aspect-[3/2] w-full object-cover" />
               </button>
             </li>
           ))}

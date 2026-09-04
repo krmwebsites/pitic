@@ -154,3 +154,85 @@ export function UsersIcon(props: IconProps) {
     </Base>
   );
 }
+
+export function WifiIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M2.5 9.5a14 14 0 0 1 19 0" />
+      <path d="M5.8 13a9.5 9.5 0 0 1 12.4 0" />
+      <path d="M9 16.3a5 5 0 0 1 6 0" />
+      <circle cx="12" cy="19.3" r="0.9" fill="currentColor" stroke="none" />
+    </Base>
+  );
+}
+
+export function CarIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M4 16v-4l2.2-5.2A1.5 1.5 0 0 1 7.6 6h8.8a1.5 1.5 0 0 1 1.4.8L20 12v4" />
+      <path d="M4 12h16" />
+      <path d="M4 16h16" />
+      <circle cx="7.5" cy="16.5" r="1.6" />
+      <circle cx="16.5" cy="16.5" r="1.6" />
+    </Base>
+  );
+}
+
+export function DoorIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <rect x="6" y="3" width="12" height="18" rx="1.5" />
+      <path d="M3.5 21h17" />
+      <circle cx="14.5" cy="12" r="0.9" fill="currentColor" stroke="none" />
+    </Base>
+  );
+}
+
+export function BoxIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M3.5 8 12 3.5 20.5 8v8L12 20.5 3.5 16z" />
+      <path d="M3.5 8 12 12.5 20.5 8" />
+      <path d="M12 12.5v8" />
+    </Base>
+  );
+}
+
+export function ProjectorIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <rect x="3" y="7.5" width="18" height="9" rx="2" />
+      <circle cx="15" cy="12" r="2.5" />
+      <path d="M6 12h4" />
+      <path d="M7 16.5v2M17 16.5v2" />
+    </Base>
+  );
+}
+
+export function MirrorIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <rect x="6" y="3" width="12" height="18" rx="6" />
+      <path d="m9.5 10 4-4" />
+      <path d="m9.5 14.5 6.5-6.5" />
+    </Base>
+  );
+}
+
+export function SpeakerIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <rect x="6" y="3" width="12" height="18" rx="2" />
+      <circle cx="12" cy="14.5" r="3" />
+      <circle cx="12" cy="7.5" r="1" fill="currentColor" stroke="none" />
+    </Base>
+  );
+}
+
+export function CheckIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="m5 12.5 4.5 4.5L19 7.5" />
+    </Base>
+  );
+}

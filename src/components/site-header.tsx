@@ -8,11 +8,12 @@ import { content } from "@/lib/content";
 import { nav, site } from "@/lib/site";
 import { CloseIcon, MenuIcon } from "./icons";
 
-/** Avalehe sektsioonid, mille vahel menüü indikaator kerimisel liigub. */
-type HomeSection = "hero" | "ruumid";
+/** Avalehe sektsioonid, mille vahel menüü indikaator kerimisel liigub (dokumendi järjekorras). */
+const HOME_SECTIONS = ["ruumid", "meist"] as const;
+type HomeSection = "hero" | (typeof HOME_SECTIONS)[number];
 
 function activeHref(pathname: string, section: HomeSection) {
-  if (pathname === "/") return section === "ruumid" ? "/#ruumid" : "/";
+  if (pathname === "/") return section === "hero" ? "/" : `/#${section}`;
   // Ruumi detailvaade kuulub „Ruumid“ alla.
   if (pathname.startsWith("/ruumide-rent")) return "/#ruumid";
   const match = nav.find((item) => item.href !== "/" && !item.href.startsWith("/#") && pathname.startsWith(item.href));
@@ -53,17 +54,31 @@ export function SiteHeader() {
     };
   }, [open]);
 
-  // Avalehel jälgib vaatleja, kas ruumide sektsioon on vaateakna ülemises pooles:
-  // siis on menüüs aktiivne „Ruumid“, muidu „Avaleht“.
+  // Avalehel jälgib vaatleja, milline sektsioon („Ruumid“, „Meist“) katab vaateakna
+  // 40% joone; kui ükski, on aktiivne „Avaleht“.
   useEffect(() => {
     if (pathname !== "/") return;
-    const target = document.getElementById("ruumid")?.closest("section");
-    if (!target) return;
+    const targets = new Map<Element, HomeSection>();
+    for (const id of HOME_SECTIONS) {
+      const target = document.getElementById(id)?.closest("section");
+      if (target) targets.set(target, id);
+    }
+    if (targets.size === 0) return;
+    const visible = new Set<HomeSection>();
     const observer = new IntersectionObserver(
-      ([entry]) => setSection(entry.isIntersecting ? "ruumid" : "hero"),
+      (entries) => {
+        for (const entry of entries) {
+          const id = targets.get(entry.target);
+          if (!id) continue;
+          if (entry.isIntersecting) visible.add(id);
+          else visible.delete(id);
+        }
+        const last = [...HOME_SECTIONS].reverse().find((id) => visible.has(id));
+        setSection(last ?? "hero");
+      },
       { rootMargin: "-40% 0px -60% 0px", threshold: 0 },
     );
-    observer.observe(target);
+    for (const target of targets.keys()) observer.observe(target);
     return () => observer.disconnect();
   }, [pathname]);
 

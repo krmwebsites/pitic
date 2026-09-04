@@ -9,6 +9,7 @@
   "navigation": [
     { "label": "Avaleht", "href": "#avaleht" },
     { "label": "Ruumid", "href": "#ruumid" },
+    { "label": "Meist", "href": "#meist" },
     { "label": "Broneerimine", "href": "#broneerimine" },
     { "label": "Kontakt", "href": "#kontakt" }
   ],
@@ -16,7 +17,8 @@
     "heading": "Kõik vajalik ühe katuse all.",
     "body": "Ruumid treeninguteks, kohtumisteks ja sündmusteks Keila keskväljakul.",
     "primaryCta": "Vaata ruume",
-    "secondaryCta": "Broneeri ruum"
+    "secondaryCta": "Broneeri ruum",
+    "houseCta": "Tutvu majaga"
   },
   "highlights": [
     {

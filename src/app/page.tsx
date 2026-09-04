@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarCheckIcon, DumbbellIcon, PinIcon, UsersIcon } from "@/components/icons";
+import { AboutSection } from "@/components/about-section";
 import { Photo } from "@/components/photo";
 import { BlurText } from "@/components/reactbits/blur-text";
 import { Reveal } from "@/components/reveal";
@@ -66,8 +67,8 @@ export default function HomePage() {
               <Link href="/#ruumid" className="btn btn-sage">
                 {content.hero.primaryCta}
               </Link>
-              <Link href="/broneerimine" className="btn btn-sage-outline">
-                {content.hero.secondaryCta}
+              <Link href="/#meist" className="btn btn-sage-outline">
+                {content.hero.houseCta}
               </Link>
             </div>
 
@@ -121,6 +122,9 @@ export default function HomePage() {
           </p>
         </Reveal>
       </section>
+
+      {/* Meist (menüü „Meist“ kerib siia): maja, ruumide omadused, koostööpartnerid. */}
+      <AboutSection />
     </>
   );
 }

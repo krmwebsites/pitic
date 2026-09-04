@@ -1,10 +1,10 @@
 /**
  * Kõik lehe fotod ühest kohast. Failid on kaustas public/fotod.
  *
- * Ruumide galeriid: viis vaadet ruumi kohta, esimene on ruumi põhifoto
- * (kaartidel ja galerii avapilt). Uue foto lisamiseks pane fail kausta ja
- * lisa üks kirje vastavasse massiivi. `placeholder: true` kuvab pildil
- * sildi „Näidisfoto“; avalehe hero-pilt on veel näidis.
+ * Ruumide galeriid: Keskväljak 15 päris fotod, järjestatud üldvaadetest
+ * detailideni; esimene on ruumi põhifoto (kaartidel ja galerii avapilt).
+ * Uue foto lisamiseks pane fail kausta ja lisa alt-tekst vastavasse
+ * massiivi (fotode arv on vaba). `placeholder: true` kuvab sildi „Näidisfoto“.
  */
 
 export type Photo = {
@@ -16,46 +16,60 @@ export type Photo = {
   placeholder: boolean;
 };
 
-function gallery(slug: string, alts: string[]): Photo[] {
-  return alts.map((alt, i) => ({
-    src: `/fotod/${slug}-${i + 1}.webp`,
-    alt,
-    width: 1536,
-    height: 1024,
-    placeholder: false,
-  }));
+function photo(src: string, alt: string, width: number, height: number): Photo {
+  return { src: `/fotod/${src}.webp`, alt, width, height, placeholder: false };
+}
+
+/** Galerii failid on nimega `<slug>-<n>.webp`; kõrgus antakse ette, kui foto ei ole 3:2. */
+function gallery(slug: string, items: (string | [alt: string, height: number])[]): Photo[] {
+  return items.map((item, i) => {
+    const [alt, height] = typeof item === "string" ? [item, 1066] : item;
+    return photo(`${slug}-${i + 1}`, alt, 1600, height);
+  });
 }
 
 export const photos = {
-  hero: {
-    src: "/fotod/hero-space.webp",
-    alt: "Avar ja valgusküllane vastuvõturuum puitseina ja istumisnurgaga",
-    width: 1048,
-    height: 906,
-    placeholder: true,
-  },
+  /** Avalehe hero: hoone tänava poolt. */
+  hero: photo("hero-maja", "Keskväljak 15 hoone Keilas", 1440, 958),
+  /** „Meist“: hoone hoovi poolt (püstine). */
+  house: photo("maja-hoov", "Keskväljak 15 hoone hoovi poolt", 798, 1060),
 } as const satisfies Record<string, Photo>;
 
 export const galleries = {
   jousaal: gallery("jousaal", [
-    "Jõusaal: jõuraam, kang ja kardiotrenažöör suurte akende all",
-    "Jõusaal: jõuraam ja kettad lähemalt",
-    "Jõusaal: jõuraam, treeningpink ja hantlite rest",
-    "Jõusaal: hantlite rest ja reguleeritav pink",
-    "Jõusaal: vaade akende ja kardiotrenažööride poole",
+    "Jõusaal: plokkmasin, kükiraam ja aknad",
+    "Jõusaal: lamamispink ja kükiraam",
+    "Jõusaal: hantlirest, kettad ja peegelsein",
+    ["Jõusaal: jooksulint, jalgratas ja sõudeergomeeter", 1069],
+    "Jõusaal: lõuatõmbe- ja dip-raam, jooksulint ja elliptiline trenažöör",
+    "Jõusaal: reguleeritav pink ja hantlid peegelseina ees",
+    "Jõusaali riietusruum pingi ja nagidega",
+    "Riietusruumi koridor ja peegel",
+    "Riietusruumi nagisein ja pink",
+    "Dušširuum",
+    "Hantlid lähivaates",
+    "Riietusruumi nagid lähivaates",
+    "Riidepuud riietusruumis",
   ]),
   "noupidamiste-ruum": gallery("noupidamiste-ruum", [
-    "Nõupidamiste ruum: pikk puidust laud, toolid ja ekraan seinal",
-    "Nõupidamiste ruum: vaade akende poolt laua suunas",
-    "Nõupidamiste ruum: laud ja toolid diagonaalvaates",
-    "Nõupidamiste ruum: laud ja ekraan lähemalt",
-    "Nõupidamiste ruum: vaade ukse poolt",
+    ["Nõupidamiste ruum: koosolekulaud, toolid ja aknad", 1067],
+    "Nõupidamiste ruum: projektoripilt seinal ja koosolekulaud",
+    ["Nõupidamiste ruum: laud, toolid ja uksed", 1071],
+    ["Nõupidamiste ruum: laud ukse poolt vaadatuna", 904],
+    ["Nõupidamiste ruum: laud, pabertahvel ja kohvilaud", 1067],
+    "Nõupidamiste ruum: laud ja projektoripilt lähemalt",
+    "Nõupidamiste ruum koolituspaigutuses: toolid kirjutusalustega",
+    ["Nõupidamiste ruum koolituspaigutuses ja pabertahvel", 871],
+    "Koolituspaigutus akna poolt vaadatuna",
+    "Sülearvuti ja pabertahvel koolituspaigutuses",
+    "Klaasid, presskann ja veekeetja kohvilaual",
   ]),
   suursaal: gallery("suursaal", [
-    "Suur saal: toolide read lava ees, suured aknad",
-    "Suur saal: toolide read külgvaates",
-    "Suur saal: toolide read vaadatuna saali tagant",
-    "Suur saal: toolide read paremalt küljelt",
-    "Suur saal: laudade paigutus ürituseks",
+    "Suur saal: tühi saal, parkett ja aknad",
+    "Suur saal: toolide read ja projektoriekraan",
+    ["Suur saal: toolide read külgvaates", 1020],
+    "Suur saal: toolid ringis",
+    "Suur saal: toolid ringis ukse poolt",
+    "Suur saal: toolid ringis lähemalt",
   ]),
 } satisfies Record<string, Photo[]>;
