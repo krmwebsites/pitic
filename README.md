@@ -41,7 +41,9 @@ Kaustas `public/fotod` on praegu **näidisfotod**, mis on lõigatud disaini refe
 Need ei ole Pitici päris ruumid ja kannavad lehel silti „Näidisfoto“. Enne avaldamist:
 
 1. asenda failid `hero-space.webp`, `room-gym.webp`, `room-meeting.webp`, `room-hall.webp`
-   päris fotodega (kuvasuhe 4:3, hero võib olla laiem);
+   päris fotodega (kuvasuhe 4:3, hero võib olla laiem); ruumi galerii lisafotod
+   (`room-*-2.webp`) on praegu sama foto lähivaated, lisa nende asemele päris fotod ja
+   täienda `galleries` massiive failis `src/lib/photos.ts` (fotode arv on vaba);
 2. uuenda `src/lib/photos.ts`-is mõõdud, alt-tekstid ja pane `placeholder: false`;
 3. loo Open Graphi pilt päris fotoga (`src/app/opengraph-image.png`, 1200 × 630).
 

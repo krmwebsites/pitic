@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookingFlow } from "@/components/booking/booking-flow";
-import { ArrowLeftIcon, ArrowRightIcon, CalendarCheckIcon, PinIcon, UsersIcon } from "@/components/icons";
-import { Photo } from "@/components/photo";
+import { ArrowLeftIcon, ArrowRightIcon, UsersIcon } from "@/components/icons";
+import { RoomGallery } from "@/components/room-gallery";
 import { getBookingConfig } from "@/lib/booking";
 import { content } from "@/lib/content";
 import { getRoom, roomHref, rooms } from "@/lib/rooms";
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: RoomPageProps): Promise<Metad
 
 /**
  * Ruumi vaade + broneerimine (layout-artifacti vaade 03, kompositsioon mockupi järgi):
- * vasakul suur foto, ruumi nimi, faktid ja omadused ning teised ruumid;
+ * vasakul galerii, ruumi nimi ja kirjeldus ning teised ruumid;
  * paremal kleepuv broneerimiskaart. Veerge eraldab vertikaalne joon.
  */
 export default async function RoomPage({ params }: RoomPageProps) {
@@ -39,37 +39,26 @@ export default async function RoomPage({ params }: RoomPageProps) {
   const config = getBookingConfig();
   const others = rooms.filter((item) => item.slug !== room.slug);
 
-  const features = [
-    {
-      icon: CalendarCheckIcon,
-      title: "Sobib",
-      text: room.suitedFor.join(", ").toLowerCase().replace(/^./, (c) => c.toUpperCase()) + ".",
-    },
-    {
-      icon: PinIcon,
-      title: site.address.full,
-      text: `Broneeritav ${site.hours.days.toLowerCase()} kell ${site.hours.open.replace(/^0/, "")}–${site.hours.close}.`,
-    },
-  ];
-
   return (
     <div className="wrap">
       <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-        {/* Vasak veerg: foto, nimi, faktid, omadused, teised ruumid */}
+        {/* Vasak veerg: galerii, nimi, kirjeldus, teised ruumid */}
         <div className="py-6 lg:border-r lg:border-line lg:py-8 lg:pr-10 xl:pr-12">
           <Link href="/#ruumid" className="arrow-link text-sm">
             <ArrowLeftIcon />
             {content.navigation[1].label}
           </Link>
 
-          <Photo
-            photo={room.photo}
-            priority
-            sizes="(min-width: 1024px) 55vw, 100vw"
-            className="mt-4 aspect-[16/9] rounded-md border border-line lg:aspect-auto lg:h-[clamp(11rem,calc(100svh-40rem),18rem)]"
-          />
+          {/* Galerii: suur pilt, nooled, pisipildid ja täisekraanivaade. */}
+          <div className="mt-4">
+            <RoomGallery
+              photos={room.gallery}
+              roomName={room.name}
+              className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-[clamp(18rem,calc(100svh-31.5rem),34rem)]"
+            />
+          </div>
 
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
             <h1 className="text-h2">{room.name}</h1>
             <span className="pill pill-soft">
               <UsersIcon size={16} />
@@ -77,37 +66,20 @@ export default async function RoomPage({ params }: RoomPageProps) {
             </span>
           </div>
 
-          <p className="mt-3 max-w-prose text-[0.9375rem]">{room.description}</p>
-
-          <ul className="mt-4 divide-y divide-line border-y border-line">
-            {features.map((feature) => {
-              const Icon = feature.icon;
-              return (
-                <li key={feature.title} className="flex items-start gap-3 py-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sage-soft text-sage">
-                    <Icon size={17} />
-                  </span>
-                  <span>
-                    <span className="block text-[0.9375rem] font-medium text-ink">{feature.title}</span>
-                    <span className="meta block">{feature.text}</span>
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
+          <p className="mt-2 max-w-prose text-[0.9375rem]">{room.description}</p>
 
           <a href="#broneeri" className="btn btn-sage btn-block mt-6 lg:hidden">
             {content.hero.secondaryCta}
           </a>
 
-          <nav aria-label="Teised ruumid" className="mt-6">
+          <nav aria-label="Teised ruumid" className="mt-4">
             <p className="meta">Teised ruumid</p>
             <ul className="mt-2 divide-y divide-line border-y border-line">
               {others.map((item) => (
                 <li key={item.slug}>
                   <Link
                     href={roomHref(item.slug)}
-                    className="group flex items-center justify-between gap-4 py-2.5 text-base font-medium text-ink transition-colors hover:text-sage"
+                    className="group flex items-center justify-between gap-4 py-2 text-base font-medium text-ink transition-colors hover:text-sage"
                   >
                     <span>
                       {item.name}
